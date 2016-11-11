@@ -13,12 +13,16 @@ The templates folder will have the header and footer which are static and the bo
     <body>
         <?php
         include 'includes.php';
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
+
         // check for session if session exists then go to beck-end else remain of front-end
         ///echo "trafic control";
         //$file = new body();
-        $parents = new Student();
-        $pt = array("m_fname"=>"rosie");
+        
+        $pt = array("m_fname" => "rosie");
         $parents->StudentParent($pt);
+        
         ?>
     </body>
 </html>

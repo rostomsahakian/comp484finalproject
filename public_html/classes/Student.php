@@ -17,9 +17,12 @@ class Student {
     public $info;
     public $SParent;
     public $flag = 0;
+    private $_mysqli;
+    private $_db;
 
     public function __construct() {
-        ;
+        $this->_db = DBCon::getInstance();
+        $this->_mysqli = $this->_db->getConnection();
     }
 
     /*
@@ -69,10 +72,10 @@ class Student {
         if (!is_array($parent)) {
             $this->flag = 1;
         } else {
-        /*
-         * We will insert the given data into the parents table
-         */
-       
+            /*
+             * We will insert the given data into the parents table
+             */
+            echo $parent['m_fname'];
         }
     }
 
