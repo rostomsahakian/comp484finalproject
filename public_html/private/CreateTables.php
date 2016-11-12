@@ -41,4 +41,30 @@ class CreateTables {
         $result = $this->_mysqli->query($sql);
     }
 
+    /*
+     * Create Table for school districts
+     */
+
+    public function CreateSchoolDistrictTable() {
+        $sql = "CREATE TABLE IF NOT EXISTS comp484_schooldistrict "
+                . " ( "
+                . "id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "
+                . "district VARCHAR (250) NOT NULL "
+                . ")";
+        $result = $this->_mysqli->query($sql);
+    }
+    
+    /*
+     * Create table for all the schools with respective ditricts
+     */
+    public function CreateSchoolstableNames(){
+         $sql = "CREATE TABLE IF NOT EXISTS comp484_schoolname "
+                . " ( "
+                . "id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "
+                . "school_name VARCHAR (250) NOT NULL, "
+                . "district_id INT NOT NULL "
+                . ")";
+        $result = $this->_mysqli->query($sql);
+    }
+
 }

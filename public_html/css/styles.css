@@ -8,3 +8,26 @@ and open the template in the editor.
     Author     : rostom
 */
 
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+.searchForm{
+    text-align: center !important;
+    margin-top:200px;
+}
+.searchForm input[type="text"]{
+    width: 500px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 0px 5px 5px 0px;
+}
+.searchForm .search_label{
+    background-color: #ccc;
+    padding: 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px 0px 0px 5px;
+    left: 599px;
+    position: absolute;
+}

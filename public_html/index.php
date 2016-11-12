@@ -7,20 +7,11 @@ The templates folder will have the header and footer which are static and the bo
 -->
 
 <?php
-include 'templates/header.php';
-include 'includes.php';
-
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
-// check for session if session exists then go to beck-end else remain of front-end
-///echo "trafic control";
-//$file = new body();
-
-$pt = array("m_fname" => "rosie");
-$students->StudentParent($pt);
+include 'includes.php';
+include 'templates/header.php';
+$body->SearchSchools();
 include 'templates/footer.php';
 ?>
 
