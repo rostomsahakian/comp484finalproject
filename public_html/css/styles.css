@@ -681,3 +681,13 @@ footer p{
     width: 216px;
     height: 27px;
 }
+#children_info{
+    list-style: none;
+    border: 1px solid #000000;
+    width: 80%;
+    padding: 15px;
+}
+#edit-button{
+    float: right;
+    padding: 10px;
+}

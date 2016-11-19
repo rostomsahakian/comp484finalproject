@@ -2,7 +2,6 @@
 
 
 window.addEventListener("load", AddChild, false);
-
 function AddChild() {
 
     document.getElementById('addchild').onclick = AddChildRunValidations;
@@ -28,11 +27,9 @@ function isNumberKey(evt) {
 
 
 function TabsAutomonth() {
-    //if on key up it has reached the max length the move to next field
+//if on key up it has reached the max length the move to next field
     var first = document.getElementById("month").maxLength;
     var m = document.getElementById("month").value;
-
-
     if (m.length === first) {
 
         document.getElementById("day").focus();
@@ -41,10 +38,9 @@ function TabsAutomonth() {
 }
 
 function TabsAutoday() {
-    //if on key up it has reached the max length the move to next field
+//if on key up it has reached the max length the move to next field
     var second = document.getElementById("day").maxLength;
     var d = document.getElementById("day").value;
-
     if (d.length === second) {
         document.getElementById("year").focus();
     }
@@ -54,6 +50,30 @@ function TabsAutoday() {
  * *****************************************************************************
  */
 
+function AddChildRunValidations() {
+
+    if (AddChildDoCheckFields() === false) {
+        console.log("false");
+    } else if (addchildcheckfname() === false) {
+    } else if (addchildchecklname() === false) {
+    } else if (addchildcheckmonth() === false) {
+    } else if (addchildcheckday() === false) {
+    } else if (addchildcheckyear() === false) {
+    } else if (addchildcheckgender() === false) {
+    } else if (addchildcheckgrade() === false) {
+    } else if (addchildcheckdistrict() === false) {
+    } else if (addchildcheckschool() === false) {
+    } else {
+
+        try {
+
+            AddingChildProcess();
+        } catch (e) {
+            alert(e);
+        }
+
+    }
+}
 
 
 
@@ -90,8 +110,8 @@ function createAddChildXmlHttpRequestObject() {
 //function which gets triggered on the event onkeyup in search box  
 function AddingChildProcess() {
     if (AddChildXmlHttp.readyState == 4 || AddChildXmlHttp.readyState == 0) {
-        //filter = document.getElementById('filter').style.display = "block";
-        //Store the keyword form the search box in a variable  
+//filter = document.getElementById('filter').style.display = "block";
+//Store the keyword form the search box in a variable  
         var childfname = encodeURIComponent(document.getElementById("cfname").value);
         var childmname = encodeURIComponent(document.getElementById("cmname").value);
         var childlname = encodeURIComponent(document.getElementById("clname").value);
@@ -100,10 +120,9 @@ function AddingChildProcess() {
         var childDOBYear = encodeURIComponent(document.getElementById("year").value);
         var parent_id = encodeURIComponent(document.getElementById("parent_id").value);
         var Gender = document.getElementsByName('gender');
-
         for (var i = 0, length = Gender.length; i < length; i++) {
             if (Gender[i].checked) {
-                // do whatever you want with the checked radio
+// do whatever you want with the checked radio
 
                 var childGender = encodeURIComponent(Gender[i].value);
                 // only one radio can be logically checked, don't check the rest
@@ -126,29 +145,11 @@ function AddingChildProcess() {
         AddChildXmlHttp.send("cfname=" + childfname +
                 "&cmname=" + childmname + "&clname=" + childlname + "&month=" + childDOBMonth + "&day=" + childDOBDay + "&year=" + childDOBYear + "&gender=" + childGender +
                 "&last_grade=" + childLastGrade + "&dist=" + district + "&school=" + school +
-                "&teacher=" + childTeacher + "&parent_id=" + parent_id+"&addchild="+submitb);
-
-
+                "&teacher=" + childTeacher + "&parent_id=" + parent_id + "&addchild=" + submitb);
     } else {
     }
 }
 
-function AddChildRunValidations() {
-
-    if (AddChildDoCheckFields() === false) {
-        console.log("false");
-
-    } else {
-
-        try {
-
-            AddingChildProcess();
-        } catch (e) {
-            alert(e);
-        }
-
-    }
-}
 
 function AddChildHandleAjaxResponse() {
     if (AddChildXmlHttp.readyState == 4 || AddChildXmlHttp.readyState == 0) {
@@ -183,20 +184,16 @@ function AddChildDoCheckFields() {
     var checkchildDOBDay = document.getElementById("day").value;
     var checkchildDOBYear = document.getElementById("year").value;
     var checkGender = document.getElementsByName('gender');
-
     for (var i = 0, length = checkGender.length; i < length; i++) {
         if (checkGender[i].checked) {
-            // do whatever you want with the checked radio
-//            alert(Gender[i].value);
             var checkchildGender = checkGender[i].value;
-            // only one radio can be logically checked, don't check the rest
             break;
         } else {
             var checkchildGender = "";
         }
 
     }
-    console.log("gender=" + checkchildGender);
+    // console.log("gender=" + checkchildGender);
     var checkchildLastGrade = document.getElementById("last_grade").value;
     var checkchildSchoolDistrict = document.getElementById("schooldist");
     if (typeof checkchildSchoolDistrict != 'undefined') {
@@ -204,8 +201,6 @@ function AddChildDoCheckFields() {
     }
     var checkchildSchoolName = document.getElementById("schoolName");
     var checkschool = checkchildSchoolName.options[checkchildSchoolName.selectedIndex].value;
-
-
     if ((checkchildfname === "") && (checkchildlname === "") && (checkchildDOBMonth === "") && (checkchildDOBDay === "") && (checkchildDOBYear === "")
             && (checkchildLastGrade === "") && (checkdistrict === "--") && (checkschool === "--") && (checkchildGender === "")) {
 // 
@@ -216,9 +211,6 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade_e').innerHTML = "Last completed grade is required";
         document.getElementById('schooldist_e').innerHTML = "Please select your school district";
         document.getElementById('schoolName_e').innerHTML = "Please first select school district, then school name";
-
-
-
         document.getElementById('cfname_e').style.color = "#E12B2D";
         document.getElementById('clname_e').style.color = "#E12B2D";
         document.getElementById('dob_e').style.color = "#E12B2D";
@@ -226,7 +218,6 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade_e').style.color = "#E12B2D";
         document.getElementById('schooldist_e').style.color = "#E12B2D";
         document.getElementById('schoolName_e').style.color = "#E12B2D";
-
         document.getElementById('cfname').style.border = "1px solid #E12B2D";
         document.getElementById('clname').style.border = "1px solid #E12B2D";
         document.getElementById('month').style.border = "1px solid #E12B2D";
@@ -236,8 +227,6 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade').style.border = "1px solid #E12B2D";
         document.getElementById('schooldist').style.border = "1px solid #E12B2D";
         document.getElementById('schoolName').style.border = "1px solid #E12B2D";
-
-
         status = false;
     } else {
         document.getElementById('cfname_e').innerHTML = "";
@@ -247,8 +236,6 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade_e').innerHTML = "";
         document.getElementById('schooldist_e').innerHTML = "";
         document.getElementById('schoolName_e').innerHTML = "";
-
-
         document.getElementById('cfname').style.border = "";
         document.getElementById('clname').style.border = "";
         document.getElementById('month').style.border = "";
@@ -258,10 +245,16 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade').style.border = "";
         document.getElementById('schooldist').style.border = "";
         document.getElementById('schoolName').style.border = "";
-
         status = true;
     }
-    if (checkchildfname === "") {
+    return status;
+}
+
+
+function addchildcheckfname() {
+    var status = false;
+    var chfname = document.getElementById('cfname').value;
+    if (chfname === "") {
         document.getElementById('cfname_e').innerHTML = "Child's first name is required!";
         document.getElementById('cfname_e').style.color = "#E12B2D";
         document.getElementById('cfname').style.border = "1px solid #E12B2D";
@@ -270,9 +263,13 @@ function AddChildDoCheckFields() {
         document.getElementById('cfname_e').innerHTML = "";
         document.getElementById('cfname').style.border = "";
         status = true;
-
     }
-    if (checkchildlname === "") {
+    return status;
+}
+function addchildchecklname() {
+    var status = false;
+    var chlname = document.getElementById('clname').value;
+    if (chlname === "") {
         document.getElementById('clname_e').innerHTML = "Child's last name is required";
         document.getElementById('clname_e').style.color = "#E12B2D";
         document.getElementById('clname').style.border = "1px solid #E12B2D";
@@ -281,97 +278,125 @@ function AddChildDoCheckFields() {
         document.getElementById('clname_e').innerHTML = "";
         document.getElementById('clname').style.border = "";
         status = true;
-
     }
-    if (checkchildDOBMonth === "") {
+    return status;
+}
+function addchildcheckmonth() {
+    var status = false;
+    var chdobmonth = document.getElementById('month').value;
+    if (chdobmonth === "") {
         document.getElementById('dob_e').innerHTML = "Please enter DOB month.";
         document.getElementById('dob_e').style.color = "#E12B2D";
         document.getElementById('month').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('dob_e').innerHTML = "";
         document.getElementById('month').style.border = "";
-
         status = true;
-
     }
-    if (checkchildDOBDay === "") {
+    return status;
+}
+function addchildcheckday() {
+    var status = false;
+    var dobday = document.getElementById('day').value;
+    if (dobday === "") {
         document.getElementById('dob_e').innerHTML = "Please enter DOB day.";
         document.getElementById('dob_e').style.color = "#E12B2D";
         document.getElementById('day').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('dob_e').innerHTML = "";
         document.getElementById('day').style.border = "";
         status = true;
-
     }
-    if (checkchildDOBYear === "") {
+    return status;
+}
+function addchildcheckyear() {
+    var status = false;
+    var dobyear = document.getElementById('year').value;
+    if (dobyear === "") {
         document.getElementById('dob_e').innerHTML = "Please enter DOB year";
         document.getElementById('dob_e').style.color = "#E12B2D";
         document.getElementById('year').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('dob_e').innerHTML = "";
         document.getElementById('year').style.border = "";
         status = true;
+    }
+    return status;
+}
+function addchildcheckgender() {
+    var status = false;
+    var checkGender = document.getElementsByName('gender');
+    for (var i = 0, length = checkGender.length; i < length; i++) {
+        if (checkGender[i].checked) {
+            var checkchildGender = checkGender[i].value;
+            break;
+        } else {
+            var checkchildGender = "";
+        }
 
     }
+    console.log("check gender = " + checkchildGender);
     if (checkchildGender === "") {
         document.getElementById('gender_e').innerHTML = "Child's gender is required";
         document.getElementById('gender_e').style.color = "#E12B2D";
         document.getElementById('gender').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('gender_e').innerHTML = "";
         document.getElementById('gender').style.border = "";
         status = true;
-
-
     }
-    if (checkchildLastGrade === "") {
+    return status;
+}
+function addchildcheckgrade() {
+    var status = false;
+    var chlgrade = document.getElementById('last_grade').value;
+    if (chlgrade === "") {
         document.getElementById('last_grade_e').innerHTML = "Last completed grade is required";
         document.getElementById('last_grade_e').style.color = "#E12B2D";
         document.getElementById('last_grade').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('last_grade_e').innerHTML = "";
         document.getElementById('last_grade').style.border = "";
         status = true;
-
-
     }
-    if (checkdistrict === "--") {
+    return status;
+}
+function addchildcheckdistrict() {
+    var status = false;
+    var chdistrict = document.getElementById('schooldist').value;
+    if (chdistrict === "--") {
         document.getElementById('schooldist_e').innerHTML = "Please select your school district";
         document.getElementById('schooldist_e').style.color = "#E12B2D";
         document.getElementById('schooldist').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('schooldist_e').innerHTML = "";
         document.getElementById('schooldist').style.border = "";
         status = true;
-
     }
-    if (checkschool === "--") {
+    return status;
+}
+function addchildcheckschool() {
+    var status = false;
+    var chschool = document.getElementById('schoolName').value;
+    if (chschool === "--") {
         document.getElementById('schoolName_e').innerHTML = "Please first select school district, then school name";
         document.getElementById('schoolName_e').style.color = "#E12B2D";
         document.getElementById('schoolName').style.border = "1px solid #E12B2D";
-
         status = false;
     } else {
         document.getElementById('schoolName_e').innerHTML = "";
         document.getElementById('schoolName').style.border = "";
         status = true;
-
     }
     return status;
 }
+
 
 
 

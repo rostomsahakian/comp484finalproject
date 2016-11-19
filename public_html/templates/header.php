@@ -18,7 +18,6 @@ The templates folder will have the header and footer which are static and the bo
 
 
         <?php
-        
         if ($_REQUEST == NULL || $_GET['cmd'] == "home") {
             ?>
             <script src='../js/search.js' type='text/javascript'></script>
@@ -64,6 +63,12 @@ The templates folder will have the header and footer which are static and the bo
 
                                 <?php
                                 break;
+                            case 'edit_child':
+                                ?>
+                                <script src='../js/getschoolstoedit.js' type='text/javascript'></script>
+                                <script src='../js/editchildinfo.js' type='text/javascript'></script>
+                                <?php
+                                break;
                         }
                     }
                     ?>
@@ -102,7 +107,7 @@ The templates folder will have the header and footer which are static and the bo
 //                    //var_dump($userinfo);
 //                    foreach ($data as $uinfo) {
 
-                        $username = $_SESSION['user_n'];
+                    $username = $_SESSION['user_n'];
 //                    }
                 }
                 ?>

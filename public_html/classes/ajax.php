@@ -35,3 +35,9 @@ if(isset($_POST['schoold']) && isset($_POST['key'])){
 if(isset($_POST['teacher'])){
     $ajax->DoAddChildrenIntoDatabase($_POST);
 }
+if(isset($_POST['editschool'])){
+     $ajax->GetSchoolNamesByDistrictID($_POST['editschool']);
+}
+if(isset($_POST['doeditchild'])){
+    $ajax->EditChildInformation($_POST);
+}

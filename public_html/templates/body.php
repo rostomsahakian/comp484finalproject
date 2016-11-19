@@ -24,8 +24,8 @@ class body {
     public function __construct() {
         $this->_db = DBCon::getInstance();
         $this->_mysqli = $this->_db->getConnection();
-//        if (isset($_POST['addchild'])) {
-//            $this->DoAddChildrenIntoDatabase($_POST);
+//        if (isset($_POST['doeditchild'])) {
+//            $this->EditChildInformation($_POST);
 //        }
     }
 
@@ -496,6 +496,71 @@ class body {
                 echo "user added";
             } else {
                 echo "unable to add";
+            }
+        }
+    }
+
+    public function EditChildInformation($data) {
+        $things_to_update = array();
+        $sql = "SELECT * FROM `comp484_children_info` WHERE `id` = '" . $data['child_id'] . "'";
+        $result = $this->_mysqli->query($sql);
+
+        if ($result->num_rows > 0) {
+            $edit_data = array();
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                if ($data['efname'] != $row['fname']) {
+                    $edit_data['fname'] = $data['efname'];
+                }
+                if ($data['emname'] != $row['mname']) {
+                    $edit_data['mname'] = $data['emname'];
+                }
+                if ($data['elname'] != $row['lname']) {
+                    $edit_data['lname'] = $data['elname'];
+                }
+                $dob = $data['emonth'] . "/" . $data['eday'] . "/" . $data['eyear'];
+                if ($dob != $row['dob']) {
+                    $edit_data['dob'] = $dob;
+                }
+                $birthDate = explode("/", $dob);
+                //get age from date or birthdate
+                $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y") - $birthDate[2]) - 1) : (date("Y") - $birthDate[2]));
+                if ($age != $row['age']) {
+                    $edit_data['age'] = $age;
+                }
+                if ($data['egender'] != $row['gender']) {
+                    $edit_data['gender'] = $data['egender'];
+                }
+                if ($data['elast_grade'] != $row['last_grade']) {
+                    $edit_data['last_grade'] = $data['elast_grade'];
+                }
+                if ($data['eschooldist'] != $row['district']) {
+                    $edit_data['district'] = $data['eschooldist'];
+                }
+                if ($data['eschoolName'] != $row['schoolname']) {
+                    $edit_data['schoolname'] = $data['eschoolName'];
+                }
+                if ($data['eteacher'] != $row['teacher']) {
+                    $edit_data['teacher'] = $data['eteacher'];
+                }
+            }
+        }
+        array_push($things_to_update, $edit_data);
+        //var_dump($things_to_update);
+        foreach ($things_to_update as $field => $value) {
+            if (!empty($value)) {
+                foreach ($value as $f => $v) {
+
+                    $update_data = "UPDATE `comp484_children_info` SET `" . $f . "` = '" . $v . "' WHERE `id` = '" . $data['child_id'] . "'";
+                    $update_data_res = $this->_mysqli->query($update_data);
+                    if ($update_data_res) {
+
+                        echo "data updated";
+                    } else {
+                        echo "error";
+                    }
+                }
+            } else {
+                echo "nothing to update.";
             }
         }
     }
