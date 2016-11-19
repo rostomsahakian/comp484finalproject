@@ -12,14 +12,19 @@ include 'private/DBCon.php';
 include 'private/Defines.php';
 include 'private/CreateTables.php';
 include 'classes/Navigation.php';
-include 'templates/body.php';
+
+
+
+
 /*
  * Load classes in this section 
  */
 $tables = new CreateTables();
 $students = new Student();
 $navigation = new Navigation();
-$body = new body();
+
+
+
 /*
  * call functions from private/CreateTables Here 
  */

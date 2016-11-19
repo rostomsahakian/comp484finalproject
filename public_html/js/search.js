@@ -1,7 +1,7 @@
-/* While using AJAX, it is necessary to create a different object for Internet Explorer, otherwise IE browser won't support. It is shown in below coding.  
- */
+
 var xmlHttp = createXmlHttpRequestObject();
 // Create XML Http Request object  
+
 function createXmlHttpRequestObject() {
     var xmlHttp;
     // For Internet Explorer   
@@ -35,20 +35,48 @@ function process() {
         /*Send the request, make sure you give 3 parameters  
          1-Method, 2- url, 3- true or false   
          */
-        xmlHttp.open("GET", "searchDB.php?userInput=" + userInput, true);
+        xmlHttp.open("GET", "ajax.php?userInput=" + userInput, true);
         //set the function which takes care of response  
         xmlHttp.onreadystatechange = handleResponse;
         xmlHttp.send(null);
+        window.onchange = changeFunc;
     } else {
     }
 }
+
+
+
 function handleResponse() {
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0) {
         if (xmlHttp.status == 200) {
             xmlResponse = xmlHttp.responseText;
             document.getElementById("filter").innerHTML = xmlResponse;
+
+
         } else {
             alert("something went wrong");
         }
     }
-} 
+}
+
+function changeFunc() {
+    var selectBox = document.getElementById("results");
+    console.log(selectBox);
+    try {
+        if (typeof selectBox !== 'undefined') {
+            // Now we know that foo is defined, we are good to go.
+
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            document.getElementById("userInput").value = selectedValue;
+            document.getElementById("district").value = selectedValue;
+            filter = document.getElementById('filter').style.display = "none";
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+
+
+
+
+}

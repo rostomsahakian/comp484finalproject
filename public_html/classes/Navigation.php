@@ -12,11 +12,8 @@
  */
 class Navigation {
 
-    //put your code here
-
-
     public function __construct() {
-        ;
+        
     }
 
     public function BuildNavigation() {
@@ -27,10 +24,10 @@ class Navigation {
             ?>
             <nav>
                 <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><input type="text" name="search" id="search"/></li>
+                    <li><a href="?cmd=home">Home</a></li>
+                    <li><a href="?cmd=news">News</a></li>
+                    <li><a href="?cmd=about">About</a></li>
+
                 </ul>
             </nav>
             <?php

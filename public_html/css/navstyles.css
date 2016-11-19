@@ -8,9 +8,12 @@ and open the template in the editor.
     Author     : rostom
 */
 nav {
-    background-color: #333;
+    background-color: #000099;
     margin: 0;
     overflow: hidden;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 5px;
 }
 
 nav ul{
@@ -25,8 +28,17 @@ nav ul li {
 
 /* Create a style for the first level items */
 nav > ul > li > a {
-    color: #aaa;
-    display: block;
+    color: #ffffff;
+    /*    display: block;*/
+    line-height: 2em;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+    margin-left: 10px;
+}
+nav > ul > li > a:hover {
+    background-color: #3E71A4;
+    color: #ffffff;
+    /*    display: block;*/
     line-height: 2em;
     padding: 0.5em 0.5em;
     text-decoration: none;

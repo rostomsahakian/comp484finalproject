@@ -7,27 +7,677 @@ and open the template in the editor.
     Created on : Nov 7, 2016, 8:21:29 PM
     Author     : rostom
 */
-
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 body{
     margin: 0;
     padding: 0;
     font-size: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #F7F4EE !important;
+
+}
+.wrapper{
+    width: 65%;
+    margin: auto;
+    -webkit-box-shadow: -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow:    -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    box-shadow:         -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    background-color: #ffffff;
+    height: auto !important;
+    overflow-y: visible;
+    min-height: 700px;
+    padding: 0px 1% 0px 1%;
+}
+.wrapper:before, .wrapper:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.wrapper:after {
+    clear: both;
+}
+footer{
+    width: 65%;
+    margin: auto;
+    -webkit-box-shadow: -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow:    -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    box-shadow:         -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
+    background-color: #ffffff;
+    height: auto;
+    overflow-y: visible;
+    padding: 0px 1% 0px 1%;
+    height: 200px;
+    margin-bottom: 20px;
+}
+footer img{
+    width: 100%;
+}
+footer p{
+    font-size: 1.0em;
+    font-family: Trebuchet MS, Arial, Helvetica, Sans-serif;
+    color: #4F6A92;
+    line-height: 18px;
+    font-weight: bold;
+    margin-top: 0;
+
+}
+.header{
+    width: 100%;
+    height: 120px !important;
+}
+.header .left{
+    width: 33.3%;
+    float: left;
+}
+.header .right{
+    width: 40.2%;
+    float: right;
+}
+.header .right input[type="text"]{
+    margin-top: 40px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+.header .right button{
+    z-index: 2;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 2px solid #000099;
+    margin-left: -4px;
+}
+@-moz-document url-prefix() {
+    .header .right button{
+        vertical-align: initial;   
+    }
+    .header .right input[type="text"]{
+        height: 36px;
+    }
+}
+.header .left > a > img{
+    width: 90%;
 }
 .searchForm{
     text-align: center !important;
-    margin-top:200px;
+    margin-top:0px;
 }
-.searchForm input[type="text"]{
-    width: 500px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 0px 5px 5px 0px;
+.searchForm #userInput {
+    width: 450px;
+    height: 30px;
+    border: 1px solid #C5C5C5;
+    border-radius: 0px;
+    font-size: 16px;
+
 }
-.searchForm .search_label{
-    background-color: #ccc;
-    padding: 7px;
-    border: 1px solid #cccccc;
-    border-radius: 5px 0px 0px 5px;
-    left: 599px;
-    position: absolute;
+#filter{
+    text-align: center !important;
+}
+#filter #results{
+    border-top: none !important;
+    border: 1px solid #DADADA;
+    width: 452px;
+    border-radius: 0px;
+    min-height: 117px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto !important;
+    margin-right: 106px;
+    font-size: 16px;
+    line-height: 20px;
+
+}
+@-moz-document url-prefix() {
+    #filter #results{
+        border-top: none !important;
+        border: 1px solid #DADADA;
+        width: 454px;
+        border-radius: 0px;
+        min-height: 117px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: auto !important;
+        margin-right: 110px;
+        font-size: 16px;
+        line-height: 20px;
+
+    }
+
+}
+
+#filter #results option:hover{
+    background-color: #C5C5C5; 
+}
+#filter #result{
+    border-top: none !important;
+    border: 1px solid #DADADA;
+    width: 452px;
+    border-radius: 0px;
+    min-height: 117px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto !important;
+    margin-right: 106px;
+}
+@-moz-document url-prefix(){
+    #filter #result{
+        border-top: none !important;
+        border: 1px solid #DADADA;
+        width: 454px;
+        border-radius: 0px;
+        min-height: 117px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: auto !important;
+        margin-right: 110px;
+    }
+}
+#filter #subd{
+    background:url(../images/search_glass.png) no-repeat;
+}
+.district_label label{
+    font-weight: bold;
+    text-align: left !important;
+}
+.School_label label{
+    font-weight: bold;
+    text-align: left !important;
+}
+.schoolForm{
+    text-align: center !important;
+    margin-top:20px;
+}
+#sresults{
+    text-align: center !important;
+    margin-right: 110px;
+}
+#sresults #nresults{
+    width: 454px;
+    height: 30px;
+    border: 1px solid #C5C5C5;
+    border-radius: 0px;
+    font-size: 16px;
+}
+.accounts{
+    clear: both;
+    width: 100%;
+    height: 30px;
+    text-align: right;
+}
+.accounts ul{
+    list-style: none;
+
+}
+.accounts ul li {
+    display: inline-block;
+
+}
+.accounts ul li > a{
+    text-decoration: none;
+    color: #000099;
+    padding-left: 5px;
+
+}
+.accounts ul li #last_li{
+    padding-right: 30px;
+}
+.accounts ul li  a img{
+    width: 15px;
+    vertical-align: middle;
+
+}
+.about_system{
+    padding: 45px;
+    text-align: justify;
+}
+.main_content{
+    padding: 45px;
+
+}
+#rightsres{
+    text-align: center !important;
+}
+.login-main{
+    width: 65%;
+    margin: auto;
+    padding: 80px;
+    margin-top: 60px;
+    -webkit-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    -moz-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    margin-bottom: 60px;
+}
+.login-main fieldset{
+    border: 2px solid #000099;
+    padding: 26px;
+}
+.login-main input[type="text"], input[type="password"]{
+    margin-top: 2px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+.login-main button{
+    z-index: 2;
+    border-radius: 5px;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    margin-top: 10px;
+    border: 1px solid #000099;
+}
+.login-main #dologinform{
+    width: 20px;
+}
+.login-main legend{
+    border: 1px solid #000099;
+    padding: 5px;
+    font-size: 19px;
+    background-color: #000099;
+    color: #ffffff;
+    font-weight: bold;
+}
+.login-main .forgot-pass ul{
+    list-style: none;
+}
+.login-main .forgot-pass ul li a{
+    color:#000099;
+    text-decoration: none;
+}
+.forgot-pass ul li a:hover{
+    color:#000099;
+    text-decoration: underline;
+}
+.forgot-pass ul li a:visited{
+    color:#000099;
+    text-decoration: underline;
+}
+.login-form label{
+    margin-bottom: 5px;
+}
+.login-form #required_s{
+    color:#E12B2D !important;
+}
+.reset-pass {
+    margin-top: 50px;
+}
+.reset-pass #f_p_image{
+    width: 20px;
+}
+.reset-pass input[type="email"]{
+    margin-top: 2px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+
+.sign-up-main{
+    width: 65%;
+    margin: auto;
+    padding: 80px;
+    margin-top: 60px;
+    -webkit-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    -moz-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    margin-bottom: 60px;
+}
+.sign-up-main fieldset{
+    border: 2px solid #000099;
+    padding: 26px;
+}
+.sign-up-main input[type="text"], input[type="password"], input[type="email"]{
+    margin-top: 2px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+.sign-up-main button{
+    z-index: 2;
+    border-radius: 5px;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    margin-top: 10px;
+    border: 1px solid #000099;
+}
+.sign-up-main #dologinform{
+    width: 20px;
+}
+.sign-up-main legend{
+    border: 1px solid #000099;
+    padding: 5px;
+    font-size: 19px;
+    background-color: #000099;
+    color: #ffffff;
+    font-weight: bold;
+}
+.for_h1{
+    padding-left: 45px;
+}
+.sign-up-main #telephone input[type="tel"]{
+    margin-top: 2px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+.sign-up-main #required_s{
+    color:#E12B2D !important;
+
+}
+.reset-pass-main #reset_image{
+    width: 20px;
+}
+.reset-pass-main{
+    width: 65%;
+    margin: auto;
+    padding: 80px;
+    margin-top: 60px;
+    -webkit-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    -moz-box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    box-shadow: 0px 1px 2px 1px rgba(50, 50, 50, 0.34);
+    margin-bottom: 60px;
+}
+.reset-pass-main fieldset{
+    border: 2px solid #000099;
+    padding: 26px;
+}
+.reset-pass-main input[type="text"], input[type="password"]{
+    margin-top: 2px;
+    height: 33px;
+    width: 320px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding-left: 12px;
+}
+.reset-pass-main button{
+    z-index: 2;
+    border-radius: 5px;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    margin-top: 10px;
+    border: 1px solid #000099;
+}
+.reset-pass-main #dologinform{
+    width: 20px;
+}
+.reset-pass-main legend{
+    border: 1px solid #000099;
+    padding: 5px;
+    font-size: 19px;
+    background-color: #000099;
+    color: #ffffff;
+    font-weight: bold;
+}
+.account-wrapper{
+    width: 100%;
+    padding-left: 32px;
+    margin: auto;
+}
+.account-wrapper .account-left{
+    width: 200px;
+    float: left;
+    text-align: left;
+    position: relative;
+
+
+}
+#leftnavigation {
+    background-color: #A4C4E2;
+    height: 470px;
+}
+#leftnavigation ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    list-style-image: none;
+}
+#leftnavigation ul li{
+    padding: 0;
+    margin: 0;
+    line-height: 15px;;
+}
+
+#leftnavigation ul li a{
+    background-color: #000099;
+    color: #FFFFFF;
+    display: block;
+    font-size: 0.8em;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    width: 195px;
+    padding: 3px 2px 3px 3px;
+    border-bottom: 1px solid white;
+    text-decoration: none;
+}
+#leftnavigation ul li a:hover{
+    background-color: #A4C4E2;
+}
+.account-wrapper .account-left #clock{
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 25px;
+    color: #000099;
+    margin-top: 46px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.account-wrapper .account-left fieldset{
+    border: 1px solid #000099;
+    background-color: #CF9E3D;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    height: 384px;
+    border-top-right-radius: 8px;
+}
+.account-wrapper .account-right{
+    float: left;
+    width: 700px;
+    margin-left: 5px;
+}
+.account-wrapper .account-right fieldset{
+    border: 1px solid #000099;
+    min-height: 700px;
+
+}
+
+.child-info{
+    width: 65%;
+    margin: auto;
+    padding: 5px;
+    margin-top: 10px;
+
+}
+.child-info fieldset{
+    border: 2px solid #000099;
+    padding: 5px;
+}
+.child-info div input[type="text"], input[type="tel"]{
+    margin-top: 2px;
+    height: 23px;
+    width: 200px;
+    /*    border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;*/
+    border: 1px solid #000000;
+    /*    border-top: none;*/
+    /*    border-bottom: 1px solid #DDD;*/
+    /*    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;*/
+    padding-left: 12px;
+}
+.child-info button{
+    z-index: 2;
+    border-radius: 5px;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    margin-top: 10px;
+    border: 1px solid #000099;
+}
+.child-info #dologinform{
+    width: 20px;
+}
+.child-info legend{
+    border: 1px solid #000099;
+    padding: 5px;
+    font-size: 19px;
+    background-color: #000099;
+    color: #ffffff;
+    font-weight: bold;
+}
+.child-info #required_s{
+    color:#E12B2D !important;
+}
+.child-info select{
+    width: 216px;
+    height: 27px;
 }
