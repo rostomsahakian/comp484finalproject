@@ -100,7 +100,7 @@ function ReportAbsenceHandleAjaxResponse() {
         if (ReportAbsenceXmlHttp.status == 200) {
             xmlResponse = ReportAbsenceXmlHttp.responseText;
             var ccheckchildname = document.getElementById("child_name");
-            var childname = encodeURIComponent(ccheckchildname.options[ccheckchildname.selectedIndex].value);
+            var childname = ccheckchildname.options[ccheckchildname.selectedIndex].text;
             if (xmlResponse === "wrong password") {
                 document.getElementById("report_response").innerHTML = "<p style='color:#E12B2D;'>Password did not match our records. Try again!</p>";
             } else if (xmlResponse == "unable to add") {
