@@ -16,6 +16,8 @@ class Accounts {
     private $_db;
     public $districts;
     public $schoolName;
+    public $message;
+    public $child_info;
 
     //public $body;
 
@@ -211,6 +213,13 @@ class Accounts {
                     <input type="text" name="clname" id="clname" placeholder="Child's last name"/>
                     <span id="clname_e"></span>
                 </div>
+                <div>
+                    <label>Student ID:<span id="required_s">*</span></label>
+                </div>
+                <div>
+                    <input type="text" name="studentid" id="studentid" placeholder="Child's Student ID"/>
+                    <span id="studentid_e"></span>
+                </div>
 
                 <div>
                     <label>Date of Birth:<span id="required_s">*</span></label>
@@ -233,10 +242,10 @@ class Accounts {
                     <span id="gender_e"></span>
                 </div>
                 <div>
-                    <label>Last Grade Completed as of <?= date('Y') ?><span id="required_s">*</span></label>
+                    <label>Grade as of <?= date('Y') ?><span id="required_s">*</span></label>
                 </div>
                 <div>
-                    <input type="text" name="last_grade" id="last_grade" placeholder="Last grade completed"/>
+                    <input type="text" name="last_grade" id="last_grade" placeholder="Current grade as of <?= date('Y') ?>"/>
                     <span id="last_grade_e"></span>
                 </div>
                 <div>
@@ -309,6 +318,7 @@ class Accounts {
                         $uid = base64_decode($_GET['uid']);
                         echo $uid;
                         ?>"/>
+                        <input type="hidden" name="sid" id="sid" value="<?= $_GET['sid'] ?>"/>
                         <button type="submit" name="resetpass" id="resetpass">Reset Password</button>
                     </div>
                 </form>
@@ -333,9 +343,10 @@ class Accounts {
             <div class="account-left">
                 <div id="leftnavigation">
                     <ul>
+                        <li><a href="?cmd=account&do=default">Edit Children's Information</a></li>
                         <li><a href="?cmd=account&do=add-child">Add Child Information</a></li>
                         <li><a href="?cmd=account&do=report">Report an Absence</a></li>
-                        <li><a href="?cmd=account&do=report">Early Sign Out Request</a></li>
+                        <li><a href="?cmd=account&do=early-out">Early Sign Out Request</a></li>
                         <li><a href="?cmd=account&do=history">History</a></li>
                         <li><a href="?cmd=account&do=settings">Account Settings</a></li>
                         <li><a href="?cmd=account&do=messages">Messages</a></li>
@@ -356,6 +367,10 @@ class Accounts {
                                     $this->AddChildForm();
                                     break;
                                 case 'report':
+                                    $this->ReportAbsenceForm();
+                                    break;
+                                case 'early-out':
+                                    $this->EarlySignOutForm();
                                     break;
                                 case 'history':
                                     break;
@@ -365,6 +380,12 @@ class Accounts {
                                     break;
                                 case 'edit_child':
                                     $this->DoEditChildInfo($_GET['id']);
+                                    break;
+                                case 'delete':
+                                    if ($this->DeleteChildInfo($_GET['id'])) {
+                                        $this->message = "<p style='color:#25A766'>Deletion successful.</p>";
+                                    }
+                                    $this->DefualtStateAccounts();
                                     break;
                                 default :
                                     $this->DefualtStateAccounts();
@@ -398,6 +419,7 @@ class Accounts {
 
                     <h3>Your Children's Information</h3>
                     <p>You have <?= $result->num_rows . " " . $child ?> registered with our system</p>
+                    <?= $this->message; ?>
                     <?php
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $getdistrictname = "SELECT `district` FROM `comp484_schooldistrict` WHERE `id` ='" . $row['district'] . "' ";
@@ -411,14 +433,19 @@ class Accounts {
                                         ?>
 
                                         <ul id="children_info">
-                                            <li id="edit-button"><a href="?cmd=account&do=edit_child&id=<?= $row['id'] ?>" title="edit"><img src="../images/Penciledit.png"/></a></li>
+                                            <li id="edit-button">
+                                                <a href="?cmd=account&do=edit_child&id=<?= $row['id'] ?>" title="edit"><img src="../images/Penciledit.png"/></a>
+                                                &nbsp;
+                                                <a href="?cmd=account&do=delete&id=<?= $row['id'] ?>" title="delete"><img src="../images/delete.png"/></a>
+                                            </li>
                                             <li><b>Full Name:</b>&nbsp;<?= $row['fname'] . " " . $row['lname'] ?></li>
+                                            <li><b>Student ID:</b>&nbsp;<?= $row['student_id'] ?></li>
                                             <li><b>Age:</b> &nbsp;<?= $row['age'] ?> years old</li>
                                             <li><b>School District:</b>&nbsp; <?= $district['district'] ?></li>
                                             <li><b>School Name:</b>&nbsp;<?= $school['school_name'] ?></li>
                                             <li><b>Gender</b>&nbsp;<?= $row['gender'] ?></li>
-                                            <li><b>Last Grade Graduated:</b> &nbsp;<?= $row['last_grade'] ?></li>
-                                            <li><b>Teacher name:</b>&nbsp; <?= $row['teacher'] ?></li>
+                                            <li><b>Grade:</b> &nbsp;<?= $row['last_grade'] ?></li>
+                                            <li><b>Teacher's Name:</b>&nbsp; <?= $row['teacher'] ?></li>
                                         </ul>
                                         <?php
                                     }
@@ -446,7 +473,7 @@ class Accounts {
             <div class="default-state">
                 <div class="default-state-left">
                     <h3>Your Children Information</h3>
-                    <p>You have not added any child into our system. You must add at least one child.</p>
+                    <p>You have not added any child into our system. You must add at least one child. <a href="?cmd=account&do=add-child" id="add-now-link"><img src="../images/add.png" title="add child"/>&nbsp;Add child now</a></p>
                 </div>
                 <div class="default-state-right">
 
@@ -483,6 +510,16 @@ class Accounts {
             $this->schoolName[] = NULL;
         }
         return $this->schoolName;
+    }
+
+    public function DeleteChildInfo($id) {
+        $sql = "DELETE FROM `comp484_children_info` WHERE `id` ='" . $id . "'";
+        $result = $this->_mysqli->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function DoEditChildInfo($id) {
@@ -522,7 +559,13 @@ class Accounts {
                             <input type="text" name="elname" id="elname" value="<?= isset($_POST['elname']) ? $_POST['elname'] : $row['lname'] ?>" placeholder="Child's last name"/>
                             <span id="elname_e"></span>
                         </div>
-
+                        <div>
+                            <label>Student ID:<span id="required_s">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" name="studentid" id="studentid" value="<?= isset($_POST['studentid']) ? $_POST['studentid'] : $row['student_id'] ?>" placeholder="Student ID"/>
+                            <span id="studentid_e"></span>
+                        </div>
                         <div>
                             <label>Date of Birth:<span id="required_s">*</span></label>
                         </div>
@@ -557,10 +600,10 @@ class Accounts {
                             <span id="egender_e"></span>
                         </div>
                         <div>
-                            <label>Last Grade Completed as of <?= date('Y') ?><span id="required_s">*</span></label>
+                            <label>Grade as of <?= date('Y') ?><span id="required_s">*</span></label>
                         </div>
                         <div>
-                            <input type="text" name="elast_grade" id="elast_grade" value="<?= isset($_POST['elast_grade']) ? $_POST['elast_grade'] : $row['last_grade'] ?>" placeholder="Last grade completed"/>
+                            <input type="text" name="elast_grade" id="elast_grade" value="<?= isset($_POST['elast_grade']) ? $_POST['elast_grade'] : $row['last_grade'] ?>" placeholder="Current grade as of <?= date('Y') ?>"/>
                             <span id="elast_grade_e"></span>
                         </div>
                         <div>
@@ -627,10 +670,113 @@ class Accounts {
                     </div>
                 </form>
                 <div id="edithild_response"></div>
-                
+
                 <?php
             }
         }
+    }
+
+    public function ReportAbsenceForm() {
+        ?>
+        <form method="post" id="report">     
+            <div class="report-absence">
+                <h3>Report Absences before 09:00 AM</h3>
+                <p>!important Note: In the state of California, school attendance is mandatory for all students ages six through eighteen. 
+                    California State Law says that a child is absent if he/she is ill or if there is a death in the immediate family (1-3 day limit). 
+                    All other absences are unexcused. Any tardy over 30 minutes, except for medical reasons, is also unexcused. 
+                    If your child has three unexcused absences or tardies, he/she will be considered truant (policy on truancy, visit the Student Services Department webpage). 
+                    Students who continue to have excessive absences, tardies, or truancies will be referred to the District School Attendance Review Board. </p>
+                <p>You must report absences before 09:00 am of the school day. Any thing after 09:00 am is considered an unexcused absence and will be reported to principle's office.</p>
+
+                <div>
+                    <label>Select the Child that will be absent:</label>
+                </div>
+                <div>
+                    <?php
+                    $this->GetAllChildrenInformation($_SESSION['user_i']);
+                    ?>
+                    <select name="child_name" id="child_name">
+                        <option value="--">--Select Child--</option>
+                        <?php
+                        foreach ($this->child_info as $child) {
+                            ?>
+                            <option value="<?= $child['id'] ?>"><?= $child['fname'] . " " . $child['lname'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <br/>
+                    <span id="childname_e"></span>
+                </div>
+                <div>
+                    <label>Date(s) of Absence:</label>
+                </div>
+                <div>
+                    <label>From:</label>
+                </div>
+                <div>
+                    <input type="text" id='start_dt' class='datepicker'>
+                    <br/>
+                    <span id="datefrom_e"></span>
+
+                </div>
+                <div>
+                    <label>To:</label>
+                </div>
+                <div>
+                    <input type="text" id='another_dt' class='myclass datepicker'>
+                    <br/>
+                    <span id="dateto_e"></span>
+                </div>
+                <div>
+                    <label>Reason for Absence </label>
+                </div>
+                <div>
+                    <textarea name="reason" id="reason"></textarea>
+                    <br/>
+                    <span id="reason_e"></span>
+                </div>
+                <div>
+                    <label>Password:</label>
+                </div>
+                <div>
+                    <input type="password" name="ppass" id="ppass" placeholder="Re-enter your accounts password"/>
+                    <?= isset($_POST['ppass'])?$_POST['ppass']: ""; ?>
+                    <br/>
+                    <span id="ppass_e"></span>
+                </div>
+                <div>
+                    <input type="hidden" name="parent_id" id="parent_id" value="<?= $_SESSION['user_i'] ?>"/> 
+                    <button type="submit" id="report_a" name="report_a">Report Absence</button>
+                </div>
+            </div>
+        </form>
+                <div id="report_response"></div>
+        <?php
+    }
+
+    public function GetAllChildrenInformation($parentid) {
+        $sql = "SELECT * FROM `comp484_children_info` WHERE `parent_id` = '" . $parentid . "'";
+        $result = $this->_mysqli->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $this->child_info[] = $row;
+            }
+        } else {
+            echo "no results";
+        }
+        return $this->child_info;
+    }
+
+    public function EarlySignOutForm() {
+        ?>
+        <div class="early-sign-out">
+            <h3>Early Sign out Request</h3>
+            <div>
+                <p></p>
+            </div>
+        </div>
+        <?php
     }
 
 }

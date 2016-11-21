@@ -69,6 +69,15 @@ The templates folder will have the header and footer which are static and the bo
                                 <script src='../js/editchildinfo.js' type='text/javascript'></script>
                                 <?php
                                 break;
+                            case 'report':
+                                ?>
+                                <link rel="stylesheet" type="text/css" href="../js/datepicker/datepicker.css" /> 
+                                <script type="text/javascript" src="../js/datepicker/datepicker.js"></script>
+                                <script type="text/javascript" src="../js/ReportAbsence.js"></script>
+
+
+                                <?php
+                                break;
                         }
                     }
                     ?>

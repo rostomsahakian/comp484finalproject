@@ -56,6 +56,7 @@ function AddChildRunValidations() {
         console.log("false");
     } else if (addchildcheckfname() === false) {
     } else if (addchildchecklname() === false) {
+    } else if (addchildcheckstudentID() === false) {
     } else if (addchildcheckmonth() === false) {
     } else if (addchildcheckday() === false) {
     } else if (addchildcheckyear() === false) {
@@ -115,6 +116,7 @@ function AddingChildProcess() {
         var childfname = encodeURIComponent(document.getElementById("cfname").value);
         var childmname = encodeURIComponent(document.getElementById("cmname").value);
         var childlname = encodeURIComponent(document.getElementById("clname").value);
+        var childstudentid = encodeURIComponent(document.getElementById("studentid").value);
         var childDOBMonth = encodeURIComponent(document.getElementById("month").value);
         var childDOBDay = encodeURIComponent(document.getElementById("day").value);
         var childDOBYear = encodeURIComponent(document.getElementById("year").value);
@@ -143,7 +145,7 @@ function AddingChildProcess() {
         AddChildXmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         AddChildXmlHttp.onreadystatechange = AddChildHandleAjaxResponse;
         AddChildXmlHttp.send("cfname=" + childfname +
-                "&cmname=" + childmname + "&clname=" + childlname + "&month=" + childDOBMonth + "&day=" + childDOBDay + "&year=" + childDOBYear + "&gender=" + childGender +
+                "&cmname=" + childmname + "&clname=" + childlname + "&studentid=" + childstudentid + "&month=" + childDOBMonth + "&day=" + childDOBDay + "&year=" + childDOBYear + "&gender=" + childGender +
                 "&last_grade=" + childLastGrade + "&dist=" + district + "&school=" + school +
                 "&teacher=" + childTeacher + "&parent_id=" + parent_id + "&addchild=" + submitb);
     } else {
@@ -180,6 +182,8 @@ function AddChildDoCheckFields() {
     var status = false;
     var checkchildfname = document.getElementById("cfname").value;
     var checkchildlname = document.getElementById("clname").value;
+    var checkchildstudentID = document.getElementById("studentid").value;
+
     var checkchildDOBMonth = document.getElementById("month").value;
     var checkchildDOBDay = document.getElementById("day").value;
     var checkchildDOBYear = document.getElementById("year").value;
@@ -201,18 +205,21 @@ function AddChildDoCheckFields() {
     }
     var checkchildSchoolName = document.getElementById("schoolName");
     var checkschool = checkchildSchoolName.options[checkchildSchoolName.selectedIndex].value;
-    if ((checkchildfname === "") && (checkchildlname === "") && (checkchildDOBMonth === "") && (checkchildDOBDay === "") && (checkchildDOBYear === "")
+    if ((checkchildfname === "") && (checkchildlname === "") && (checkchildstudentID === "") && (checkchildDOBMonth === "") && (checkchildDOBDay === "") && (checkchildDOBYear === "")
             && (checkchildLastGrade === "") && (checkdistrict === "--") && (checkschool === "--") && (checkchildGender === "")) {
 // 
         document.getElementById('cfname_e').innerHTML = "Child's first name is required!";
         document.getElementById('clname_e').innerHTML = "Child's last name is required";
+        document.getElementById('studentid_e').innerHTML = "Student ID is required";
         document.getElementById('dob_e').innerHTML = "Child's date of birth is required";
         document.getElementById('gender_e').innerHTML = "Child's gender is required";
         document.getElementById('last_grade_e').innerHTML = "Last completed grade is required";
         document.getElementById('schooldist_e').innerHTML = "Please select your school district";
         document.getElementById('schoolName_e').innerHTML = "Please first select school district, then school name";
+
         document.getElementById('cfname_e').style.color = "#E12B2D";
         document.getElementById('clname_e').style.color = "#E12B2D";
+        document.getElementById('studentid_e').style.color = "#E12B2D";
         document.getElementById('dob_e').style.color = "#E12B2D";
         document.getElementById('gender_e').style.color = "#E12B2D";
         document.getElementById('last_grade_e').style.color = "#E12B2D";
@@ -227,10 +234,12 @@ function AddChildDoCheckFields() {
         document.getElementById('last_grade').style.border = "1px solid #E12B2D";
         document.getElementById('schooldist').style.border = "1px solid #E12B2D";
         document.getElementById('schoolName').style.border = "1px solid #E12B2D";
+        document.getElementById('studentid').style.border = "1px solid #E12B2D";
         status = false;
     } else {
         document.getElementById('cfname_e').innerHTML = "";
         document.getElementById('clname_e').innerHTML = "";
+        document.getElementById('studentid_e').innerHTML = "";
         document.getElementById('dob_e').innerHTML = "";
         document.getElementById('gender_e').innerHTML = "";
         document.getElementById('last_grade_e').innerHTML = "";
@@ -238,6 +247,7 @@ function AddChildDoCheckFields() {
         document.getElementById('schoolName_e').innerHTML = "";
         document.getElementById('cfname').style.border = "";
         document.getElementById('clname').style.border = "";
+        document.getElementById('studentid').style.border = "";
         document.getElementById('month').style.border = "";
         document.getElementById('day').style.border = "";
         document.getElementById('year').style.border = "";
@@ -277,6 +287,21 @@ function addchildchecklname() {
     } else {
         document.getElementById('clname_e').innerHTML = "";
         document.getElementById('clname').style.border = "";
+        status = true;
+    }
+    return status;
+}
+function addchildcheckstudentID() {
+    var status = false;
+    var studentid = document.getElementById('studentid').value;
+    if (studentid === "") {
+        document.getElementById('studentid_e').innerHTML = "Child's last name is required";
+        document.getElementById('studentid_e').style.color = "#E12B2D";
+        document.getElementById('studentid').style.border = "1px solid #E12B2D";
+        status = false;
+    } else {
+        document.getElementById('studentid_e').innerHTML = "";
+        document.getElementById('studentid').style.border = "";
         status = true;
     }
     return status;

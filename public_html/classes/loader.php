@@ -72,7 +72,7 @@ class loader {
 
                     break;
                 case 'reset':
-                    if (isset($_GET['sid']) && $_SESSION['link'] == $_GET['sid']) {
+                    if (isset($_GET['sid']) && $this->body->GetUID($_GET['sid'], base64_decode($_GET['uid']))) {
                         $this->accounts->PasswordResetForm();
                     } else {
                         echo "<p style='padding:45px;'>The link has expired and can not be used any longer. Please go to the login page and request a new link.</p>";
@@ -82,9 +82,9 @@ class loader {
                     $this->body->Logout("user_in");
                     break;
                 case 'account':
-                    if(isset($_SESSION['user_in'])){
-                    $this->accounts->UserAccountMainSection();
-                    }else{
+                    if (isset($_SESSION['user_in'])) {
+                        $this->accounts->UserAccountMainSection();
+                    } else {
                         header("Location: ?cmd=home");
                     }
                     break;

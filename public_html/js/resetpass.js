@@ -48,7 +48,8 @@ function Resetprocess() {
         var doReset = encodeURIComponent(document.getElementById("resetpass").value);
         var n_pass = encodeURIComponent(document.getElementById('new_pass1').value);
         var u_email = encodeURIComponent(document.getElementById('uid').value);
-
+        var sid = encodeURIComponent(document.getElementById('sid').value);
+        console.log(sid);
         //password = encodeURIComponent(document.getElementById("pass").value);
         /*Send the request, make sure you give 3 parameters  
          1-Method, 2- url, 3- true or false   
@@ -56,7 +57,7 @@ function Resetprocess() {
         ResetxmlHttp.open("POST", "ajax.php", true);
         ResetxmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ResetxmlHttp.onreadystatechange = ResethandleResponse;
-        ResetxmlHttp.send("resetpass=" + doReset + "&new_pass1=" + n_pass + "&uid=" + u_email);
+        ResetxmlHttp.send("resetpass=" + doReset + "&new_pass1=" + n_pass + "&uid=" + u_email+"&sid="+sid);
 
 
     } else {

@@ -24,8 +24,8 @@ class body {
     public function __construct() {
         $this->_db = DBCon::getInstance();
         $this->_mysqli = $this->_db->getConnection();
-//        if (isset($_POST['doeditchild'])) {
-//            $this->EditChildInformation($_POST);
+//        if (isset($_POST['child_name'])) {
+//            $this->DoReportAbsenceToSystem($_POST);
 //        }
     }
 
@@ -233,30 +233,34 @@ class body {
         //echo $sql;
         $result = $this->_mysqli->query($sql);
         if ($result->num_rows > 0) {
-            $isFrom = "do_not_reply@cde.ca.gov";
-            $isEncoded = base64_encode($email);
-            $sid = uniqid();
-            $_SESSION['link'] = $sid;
-            $email_message = ""
-                    . "<html>"
-                    . "<head>"
-                    . "<title>California Department of Education - Account Password Recovery</title>"
-                    . "</head>"
-                    . "<body style='background-color:#fff; color:#000;'>"
-                    . "<div style=' padding-right: 15px;padding-left: 15px; margin-right: auto; margin-left: auto; border:1px solid #000; border-radius:5px;'>"
-                    . "<div style='margin-bottom:12px;'><img src='http://dev.comp484finalp.webulence.com/images/cde_logo.gif'></div>"
-                    . "<br/>"
-                    . "<p>Please follow the link below to reset your password.</p>"
-                    . "<p><a href='http://dev.comp484finalp.webulence.com/classes/loader.php?cmd=reset&uid=" . $isEncoded . "&url=mailserver&sid=" . $sid . "' title='reset'>http://dev.comp484finalp.webulence.com/classes/loader.php?cmd=reset&uid=" . $isEncoded . "&url=mailserver&sid=" . $sid . "</a></p>"
-                    . "<br/>"
-                    . "<p>Sincerely,</p>"
-                    . "<p>California Department of Education</p>"
-                    . "<p>1430 N Street</p>"
-                    . "<p>Sacramento, CA 95814 </p>"
-                    . "</div>"
-                    . "</body>"
-                    . "</html>";
-            $this->SendEmail($email, "California Department of Education - Password Reset", $email_message, $isFrom);
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $isFrom = "do_not_reply@cde.ca.gov";
+                $isEncoded = base64_encode($email);
+                $sid = uniqid();
+                ///$_SESSION['link'] = $sid;
+                $email_message = ""
+                        . "<html>"
+                        . "<head>"
+                        . "<title>California Department of Education - Account Password Recovery</title>"
+                        . "</head>"
+                        . "<body style='background-color:#fff; color:#000;'>"
+                        . "<div style=' padding-right: 15px;padding-left: 15px; margin-right: auto; margin-left: auto; border:1px solid #000; border-radius:5px;'>"
+                        . "<div style='margin-bottom:12px;'><img src='http://dev.comp484finalp.webulence.com/images/cde_logo.gif'></div>"
+                        . "<br/>"
+                        . "<p>Please follow the link below to reset your password.</p>"
+                        . "<p><a href='http://dev.comp484finalp.webulence.com/classes/loader.php?cmd=reset&uid=" . $isEncoded . "&url=mailserver&sid=" . $sid . "' title='reset'>http://dev.comp484finalp.webulence.com/classes/loader.php?cmd=reset&uid=" . $isEncoded . "&url=mailserver&sid=" . $sid . "</a></p>"
+                        . "<br/>"
+                        . "<p>Sincerely,</p>"
+                        . "<p>California Department of Education</p>"
+                        . "<p>1430 N Street</p>"
+                        . "<p>Sacramento, CA 95814 </p>"
+                        . "</div>"
+                        . "</body>"
+                        . "</html>";
+                $this->SendEmail($email, "California Department of Education - Password Reset", $email_message, $isFrom);
+                $insert_link = "INSERT INTO `comp484_reset_pass` (sid, uid) VALUES ('" . $sid . "', '" . $row['id'] . "')";
+                $insert_link_res = $this->_mysqli->query($insert_link);
+            }
             echo "found";
         } else {
             echo "no";
@@ -414,7 +418,15 @@ class body {
         $changePassword = "UPDATE `comp484_users_info` SET `password` = '" . md5($data['new_pass1']) . "' WHERE `username` ='" . trim($data['uid']) . "'";
         $result = $this->_mysqli->query($changePassword);
         if ($result) {
-            unset($_SESSION['link']);
+            //unset($_SESSION['link']);
+            $getuid = "SELECT `id` FROM `comp484_users_info` WHERE `username` ='" . $data['uid'] . "'";
+            $getuid_res = $this->_mysqli->query($getuid);
+            if ($getuid_res->num_rows > 0) {
+                while ($row = $getuid_res->fetch_array(MYSQLI_ASSOC)) {
+                    $expire_link = "DELETE FROM `comp484_reset_pass` WHERE `sid` = '" . $data['sid'] . "' AND `uid` = '" . $row['id'] . "' ";
+                    $expire_link_res = $this->_mysqli->query($expire_link);
+                }
+            }
             $isFrom = "do_not_reply@cde.ca.gov";
             $date_changed = date('l jS \of F Y h:i:s A');
             $email_message = ""
@@ -442,6 +454,25 @@ class body {
         }
     }
 
+    public function GetUID($sid, $uid) {
+        $sql = "SELECT * FROM `comp484_users_info` WHERE `username` = '" . $uid . "'";
+        $result = $this->_mysqli->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+
+                $find_link = "SELECT * FROM `comp484_reset_pass` WHERE `sid` = '" . $sid . "' AND `uid` = '" . $row['id'] . "'";
+                $find_link_res = $this->_mysqli->query($find_link);
+                if ($find_link_res->num_rows > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            echo "not found";
+        }
+    }
+
     public function Logout($session_name) {
         unset($_SESSION[$session_name]);
         header("Location: ?cmd=home");
@@ -452,6 +483,7 @@ class body {
         $fname = trim($childData['cfname']);
         $mname = $childData['cmname'];
         $lname = trim($childData['clname']);
+        $studentID = $childData['studentid'];
         $month = $childData['month'];
         $day = $childData['day'];
         $year = $childData['year'];
@@ -473,12 +505,13 @@ class body {
         if ($checkChild_res->num_rows > 0) {
             echo "no";
         } else {
-            $insert = "INSERT INTO `comp484_children_info` (fname, mname,lname,dob,age, gender,last_grade, district, schoolname, teacher, parent_id, date_added)"
+            $insert = "INSERT INTO `comp484_children_info` (fname, mname,lname,student_id,dob,age, gender,last_grade, district, schoolname, teacher, parent_id, date_added)"
                     . " VALUES "
                     . "("
                     . "'" . $fname . "', "
                     . "'" . $mname . "', "
                     . "'" . $lname . "', "
+                    . "'" . $studentID . "', "
                     . "'" . $dob . "', "
                     . "'" . $age . "', "
                     . "'" . $gender . "',"
@@ -516,6 +549,9 @@ class body {
                 }
                 if ($data['elname'] != $row['lname']) {
                     $edit_data['lname'] = $data['elname'];
+                }
+                if ($data['studentid'] != $row['student_id']) {
+                    $edit_data['student_id'] = $data['studentid'];
                 }
                 $dob = $data['emonth'] . "/" . $data['eday'] . "/" . $data['eyear'];
                 if ($dob != $row['dob']) {
@@ -561,6 +597,62 @@ class body {
                 }
             } else {
                 echo "nothing to update.";
+            }
+        }
+    }
+
+    public function DoReportAbsenceToSystem($data) {
+        $getChildInfo = "SELECT * FROM `comp484_children_info` WHERE `id` ='" . $data['child_name'] . "'";
+        $getChildInfo_res = $this->_mysqli->query($getChildInfo);
+        if ($getChildInfo_res->num_rows > 0) {
+
+            /*
+             * needed
+             * 1. studentID (db)
+             * 2. parent_id (db)
+             * 3. from ($data)
+             * 4. to ($data)
+             * 5. reason ($data)
+             * 6. time of reporting ($data)
+             * 7. date_reported ($data)
+             * 8. school dist (db)
+             * 9. school (db)
+             * 10. teahcer (db)
+             */
+            /*
+             * Check password status
+             */
+
+            while ($row = $getChildInfo_res->fetch_array(MYSQLI_ASSOC)) {
+                $checkPass = "SELECT * FROM `comp484_users_info` WHERE `id` = '" . $data['parent_id'] . "' AND `password` ='" . md5(trim($data['pass'])) . "'";
+                $checkPass_res = $this->_mysqli->query($checkPass);
+
+                if ($checkPass_res->num_rows > 0) {
+                    $date_reported = DATE_LA_ZONE;
+                    $time_repored = TIME_LA_ZONE;
+                    $insert_report = "INSERT INTO `comp484_report_absence` (student_id, parent_id, absent_from, absent_to, reason, date_reported, time_reported, school_district, school, teacher)"
+                            . " VALUES "
+                            . "("
+                            . "'" . $row['student_id'] . "', "
+                            . "'" . $data['parent_id'] . "', "
+                            . "'" . $data['dateFrom'] . "', "
+                            . "'" . $data['dateTo'] . "', "
+                            . "'" . $data['reason'] . "', "
+                            . "'" . $date_reported . "', "
+                            . "'" . $time_repored . "', "
+                            . "'" . $row['district'] . "', "
+                            . "'" . $row['schoolname'] . "', "
+                            . "'" . $row['teacher'] . "'"
+                            . ")";
+                    $insert_report_res = $this->_mysqli->query($insert_report);
+                    if ($insert_report_res) {
+                        echo "report added";
+                    } else {
+                        echo "unable to add";
+                    }
+                } else {
+                    echo "wrong password";
+                }
             }
         }
     }

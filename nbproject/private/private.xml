@@ -3,20 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/search.js</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/templates/header.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/Accounts.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/forgotpass.js</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/getschool.js</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/init.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/ajax.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/media.css</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/loader.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/templates/footer.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/Accounts.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/templates/body.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/styles.css</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/private/Defines.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/addchildren.js</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/ajax.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/editchildinfo.js</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/getschoolstoedit.js</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/media.css</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/loader.php</file>
         </group>
     </open-files>
 </project-private>

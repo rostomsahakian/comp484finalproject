@@ -56,6 +56,7 @@ function EditChildRunValidations() {
         console.log("false");
     } else if (Editchildcheckfname() === false) {
     } else if (Editchildchecklname() === false) {
+    } else if (EditchildcheckstudentID() == false) {
     } else if (Editchildcheckmonth() === false) {
     } else if (Editchildcheckday() === false) {
     } else if (Editchildcheckyear() === false) {
@@ -115,6 +116,7 @@ function EditingChildProcess() {
 //Store the keyword form the search box in a variable  
         var childfname = encodeURIComponent(document.getElementById("efname").value);
         var childmname = encodeURIComponent(document.getElementById("emname").value);
+        var childstudentid = encodeURIComponent(document.getElementById("studentid").value);
         var childlname = encodeURIComponent(document.getElementById("elname").value);
         var childDOBMonth = encodeURIComponent(document.getElementById("emonth").value);
         var childDOBDay = encodeURIComponent(document.getElementById("eday").value);
@@ -145,7 +147,7 @@ function EditingChildProcess() {
         EditChildXmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         EditChildXmlHttp.onreadystatechange = EditChildHandleAjaxResponse;
         EditChildXmlHttp.send("efname=" + childfname +
-                "&emname=" + childmname + "&elname=" + childlname + "&emonth=" + childDOBMonth + "&eday=" + childDOBDay + "&eyear=" + childDOBYear + "&egender=" + childGender +
+                "&emname=" + childmname + "&elname=" + childlname +"&studentid="+childstudentid+ "&emonth=" + childDOBMonth + "&eday=" + childDOBDay + "&eyear=" + childDOBYear + "&egender=" + childGender +
                 "&elast_grade=" + childLastGrade + "&eschooldist=" + district + "&eschoolName=" + school +
                 "&eteacher=" + childTeacher + "&eparent_id=" + parent_id + "&doeditchild=" + submitb + "&child_id=" + child_id);
     } else {
@@ -163,7 +165,7 @@ function EditChildHandleAjaxResponse() {
                 document.getElementById("edithild_response").innerHTML = "<p style='color:#E12B2D;'>There is nothing to update.</p>";
             } else if (xmlResponse == "error") {
                 document.getElementById("edithild_response").innerHTML = "<p style='color:#E12B2D;'>Error. We are unable to edit your child's info. If the error continues please contact our <a href='mailto:rostom.sahakian@gmail.com'>support team</p>.";
-            } else if (xmlResponse === "data updated" ||xmlResponse === "data updateddata updated" ) {
+            } else if (xmlResponse === "data updated" || xmlResponse === "data updateddata updated") {
                 console.log(xmlResponse);
                 document.getElementById("edithild_response").innerHTML = "<p style='color:#6DA815;'>" + fname + " " + lname + "'s info was edited.</p>";
 //                document.getElementById('hideedit').style.display = "none";
@@ -185,6 +187,7 @@ function EditChildDoCheckFields() {
     var status = false;
     var checkchildfname = document.getElementById("efname").value;
     var checkchildlname = document.getElementById("elname").value;
+    var checkchildstudentID = document.getElementById("studentid").value;
     var checkchildDOBMonth = document.getElementById("emonth").value;
     var checkchildDOBDay = document.getElementById("eday").value;
     var checkchildDOBYear = document.getElementById("eyear").value;
@@ -206,11 +209,12 @@ function EditChildDoCheckFields() {
     }
     var checkchildSchoolName = document.getElementById("eschoolName");
     var checkschool = checkchildSchoolName.options[checkchildSchoolName.selectedIndex].value;
-    if ((checkchildfname === "") && (checkchildlname === "") && (checkchildDOBMonth === "") && (checkchildDOBDay === "") && (checkchildDOBYear === "")
+    if ((checkchildfname === "") && (checkchildlname === "") && (checkchildstudentID === "") && (checkchildDOBMonth === "") && (checkchildDOBDay === "") && (checkchildDOBYear === "")
             && (checkchildLastGrade === "") && (checkdistrict === "--") && (checkschool === "--") && (checkchildGender === "")) {
 // 
         document.getElementById('efname_e').innerHTML = "Child's first name is required!";
         document.getElementById('elname_e').innerHTML = "Child's last name is required";
+        document.getElementById('studentid_e').innerHTML = "Student ID is required";
         document.getElementById('edob_e').innerHTML = "Child's date of birth is required";
         document.getElementById('egender_e').innerHTML = "Child's gender is required";
         document.getElementById('elast_grade_e').innerHTML = "Last completed grade is required";
@@ -218,6 +222,7 @@ function EditChildDoCheckFields() {
         document.getElementById('eschoolName_e').innerHTML = "Please first select school district, then school name";
         document.getElementById('efname_e').style.color = "#E12B2D";
         document.getElementById('elname_e').style.color = "#E12B2D";
+        document.getElementById('studentid_e').style.color = "#E12B2D";
         document.getElementById('edob_e').style.color = "#E12B2D";
         document.getElementById('egender_e').style.color = "#E12B2D";
         document.getElementById('elast_grade_e').style.color = "#E12B2D";
@@ -232,10 +237,13 @@ function EditChildDoCheckFields() {
         document.getElementById('elast_grade').style.border = "1px solid #E12B2D";
         document.getElementById('eschooldist').style.border = "1px solid #E12B2D";
         document.getElementById('eschoolName').style.border = "1px solid #E12B2D";
+        document.getElementById('studentid').style.border = "1px solid #E12B2D";
+
         status = false;
     } else {
         document.getElementById('efname_e').innerHTML = "";
         document.getElementById('elname_e').innerHTML = "";
+        document.getElementById('studentid_e').innerHTML = "";
         document.getElementById('edob_e').innerHTML = "";
         document.getElementById('egender_e').innerHTML = "";
         document.getElementById('elast_grade_e').innerHTML = "";
@@ -243,6 +251,7 @@ function EditChildDoCheckFields() {
         document.getElementById('eschoolName_e').innerHTML = "";
         document.getElementById('efname').style.border = "";
         document.getElementById('elname').style.border = "";
+        document.getElementById('studentid').style.border = "";
         document.getElementById('emonth').style.border = "";
         document.getElementById('eday').style.border = "";
         document.getElementById('eyear').style.border = "";
@@ -282,6 +291,21 @@ function Editchildchecklname() {
     } else {
         document.getElementById('elname_e').innerHTML = "";
         document.getElementById('elname').style.border = "";
+        status = true;
+    }
+    return status;
+}
+function EditchildcheckstudentID() {
+    var status = false;
+    var studentid = document.getElementById('studentid').value;
+    if (studentid === "") {
+        document.getElementById('studentid_e').innerHTML = "Child's last name is required";
+        document.getElementById('studentid_e').style.color = "#E12B2D";
+        document.getElementById('studentid').style.border = "1px solid #E12B2D";
+        status = false;
+    } else {
+        document.getElementById('studentid_e').innerHTML = "";
+        document.getElementById('studentid').style.border = "";
         status = true;
     }
     return status;

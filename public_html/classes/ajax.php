@@ -41,3 +41,6 @@ if(isset($_POST['editschool'])){
 if(isset($_POST['doeditchild'])){
     $ajax->EditChildInformation($_POST);
 }
+if(isset($_POST['child_name'])){
+    $ajax->DoReportAbsenceToSystem($_POST);
+}

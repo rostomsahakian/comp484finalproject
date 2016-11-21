@@ -691,3 +691,75 @@ footer p{
     float: right;
     padding: 10px;
 }
+#add-now-link{
+    color:#235A8C;
+}
+#add-now-link:hover{
+    color:#235A8C;
+}
+#add-now-link:visited{
+    color:#235A8C;
+}
+#add-now-link:active{
+    color:#235A8C;
+}
+.report-absence{
+    width: 65%;
+    margin: auto;
+    padding: 5px;
+    margin-top: 10px;
+}
+.report-absence #child_name{
+    margin-top: 2px;
+    height: 23px;
+    width: 200px;
+    border: 1px solid #000000;
+    padding-left: 12px;
+}
+.report-absence #reason{
+    width: 377px;
+    height: 160px;
+}
+.report-absence #ppass{
+    margin-top: 2px;
+    height: 23px;
+    width: 200px;
+    border: 1px solid #000000;
+    padding-left: 12px;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+}
+.report-absence button{
+    z-index: 2;
+    border-radius: 5px;
+    color: #fff;
+    outline-offset: 12px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    box-sizing: border-box;
+    background-color: #000099;
+    border-color: #000099;
+    margin-top: 10px;
+    border: 1px solid #000099;
+}
+@-moz-document url-prefix() {
+    .report-absence #reason{
+        width: 325px;
+        height: 160px;
+    }
+}
