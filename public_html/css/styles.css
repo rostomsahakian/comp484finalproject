@@ -771,43 +771,144 @@ footer p{
 }
 .months{
     clear: both !important;
+    width: 100%;
+    text-align: center;
 }
-.months ul{
-    list-style: none;
-}
-.months ul li {
-    display: inline-block;
+.months div{
+    width: 5%;
     float: left;
-    padding-left: 29px;
-    font-size: 12px;
     font-weight: bold;
+    padding-left: 21px;
+    position: absolute;
 }
+
 .main_bar{
-    min-height: 325px;
+    min-height: 350px;
+    width: 100%;
+    text-align: center;
+    background-image: url("../images/gridme/gridme.png");
+}
+.main_bar div{
+    width: 4%;
+    float: left;
+    font-weight: bold;
+    padding-left: 27px;
+
 }
 .bars {
     list-style: none;
 }
-.bars li{
+.bars{
     display: inline-block;
     float: left;
     padding-right: 29px;
     padding-left: 20px;
 }
-.bars .bars_warpper{
+.bars_warpper{
     position: relative; 
-    height: 325px;
+    height: 350px;
     /*margin-top: 112px;*/
 }
-.bars li .inside-shell{
+.inside-shell{
     position: absolute; 
     bottom:0px; 
     width: 35px; 
-    height: 2px; 
+    height: 0px; 
     background: #00B545;
     transition: height 0.2s ease-in-out;
 }
-.bars li .inside-shell:hover{
+.bars_warpper #jan{
+    right: 15px;
+}
+.bars_warpper #feb{
+    right: 18px;
+}
+.bars_warpper #mar{
+    right: 22px;
+}
+.bars_warpper #apr{
+    right: 27px;
+}
+.bars_warpper #may{
+    right: 30px;
+}
+.bars_warpper #jun{
+    right: 34px;
+}
+.bars_warpper #jul{
+    right: 38px;
+}
+.bars_warpper #aug{
+    right: 42px;
+}
+.bars_warpper #sep{
+    right: 46px;
+}
+.bars_warpper #oct{
+    right: 50px;
+}
+.bars_warpper #nov{
+    right: 54px;
+}
+.bars_warpper #dec{
+    right: 58px;
+}
+.inside-shell:hover{
     height: 200px;
 
 }
+.history-form {
+    padding: 20px;
+}
+.history-form label{
+    font-weight: bold;
+}
+.history-form select{
+    margin-top: 2px;
+    height: 23px;
+    width: 200px;
+    border: 1px solid #000000;
+    padding-left: 12px;
+}
+.inside-shell span{
+    left: 9px;
+    position: absolute;
+    bottom: 100%;
+}
+.months #l_jan{
+    left: 540px;
+}
+.months  #l_feb{
+    left: 586px;
+}
+.months  #l_mar{
+    left: 639px;
+}
+.months  #l_apr{
+    left: 692px;
+}
+.months #l_may{
+    left:738px;
+}
+.months  #l_jun{
+    left:788px;
+}
+.months  #l_jul{
+    left: 837px;
+}
+.months  #l_aug{
+    left: 888px;
+}
+.months #l_sep{
+    left:940px;
+}
+.months #l_oct{
+    left: 990px;
+}
+.months #l_nov{
+    left: 1039px;
+}
+.months  #l_dec{
+    left: 1091px;
+}
+

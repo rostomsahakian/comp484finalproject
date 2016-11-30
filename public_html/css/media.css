@@ -10,9 +10,92 @@ and open the template in the editor.
 @media screen and (max-width:1800px){
     .account-wrapper .account-right {
         float: left;
-        width: 510px;
+        width: 635px;
         margin-left: 5px;
     }
+    .months div{
+        padding-left: 14px;
+    }
+    .main_bar div{
+        padding-left: 19px;
+    }
+    .inside-shell span{
+        left:5px;
+    }
+    .months #l_jan{
+        left: 464px;
+    }
+    .months  #l_feb{
+        left: 515px;
+    }
+    .months  #l_mar{
+        left: 562px;
+    }
+    .months  #l_apr{
+        left: 612px;
+    }
+    .months #l_may{
+        left:660px;
+    }
+    .months  #l_jun{
+        left:711px;
+    }
+    .months  #l_jul{
+        left: 758px;
+    }
+    .months  #l_aug{
+        left: 812px;
+    }
+    .months #l_sep{
+        left:865px;
+    }
+    .months #l_oct{
+        left: 910px;
+    }
+    .months #l_nov{
+        left: 964px;
+    }
+    .months  #l_dec{
+        left: 1012px;
+    }
+    
+    .bars_warpper #jan{
+        right: 11px;
+    }
+    .bars_warpper #feb{
+        right: 3px;
+    }
+    .bars_warpper #mar{
+        right: -5px;
+    }
+    .bars_warpper #apr{
+        right: -15px;
+    }
+    .bars_warpper #may{
+        right: -20px;
+    }
+    .bars_warpper #jun{
+        right: -25px;
+    }
+    .bars_warpper #jul{
+        right: -30px;
+    }
+    .bars_warpper #aug{
+        right: -35px;
+    }
+    .bars_warpper #sep{
+        right: -44px;
+    }
+    .bars_warpper #oct{
+        right: -50px;
+    }
+    .bars_warpper #nov{
+        right: -57px;
+    }
+    .bars_warpper #dec{
+        right: -65px;
+    }
+
 }
 @media screen 
 and (max-width:768px){

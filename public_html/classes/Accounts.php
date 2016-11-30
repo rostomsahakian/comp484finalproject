@@ -927,8 +927,12 @@ class Accounts {
 
     public function ShowHistory() {
         ?>
+        <div class="hisory-top-div">
+            <h3>Your Child's Absentee History</h3>
+        </div>
         <form method="post">
             <div class="history-form">
+
                 <div>
                     <label>Select Child</label>
                 </div>
@@ -967,99 +971,97 @@ class Accounts {
         <div id="history_response">
 
         </div>
-        <div class="main_bar" style="border-bottom: 1px solid #000000;">
-            <ul class="bars">
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="jan">
-                        </div>
-                    </div>
+        <div class="main_bar" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000;">
 
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="feb">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="mar">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="apr">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="may">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="jun">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="jul">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="aug">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="sep">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="oct">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="nov">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="bars_warpper">
-                        <div class="inside-shell" id="dec">
-                        </div>
-                    </div>
-                </li>
 
-            </ul>
+            <div class="bars_warpper">
+                <div class="inside-shell" id="jan">
+                      <span id="jan_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="feb">
+                      <span id="feb_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="mar">
+                      <span id="mar_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="apr">
+                      <span id="apr_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="may">
+                      <span id="may_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="jun">
+                      <span id="jun_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="jul">
+                      <span id="jul_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="aug">
+                      <span id="aug_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="sep">
+                      <span id="sep_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="oct">
+                      <span id="oct_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="nov">
+                    <span id="nov_num"></span>
+                </div>
+            </div>
+
+            <div class="bars_warpper">
+                <div class="inside-shell" id="dec">
+                    <span id="dec_num"></span>
+                </div>
+            </div>
+
         </div>
         <div class="months">
-            <ul>
-                <li>Jan</li>
-                <li>Feb</li>
-                <li>Mar</li>
-                <li>Apr</li>
-                <li>May</li>
-                <li>Jun</li>
-                <li>Jul</li>
-                <li>Aug</li>
-                <li>Sep</li>
-                <li>Oct</li>
-                <li>Nov</li>
-                <li>Dec</li>
-            </ul>
+
+            <div id="l_jan">Jan</div>
+            <div id="l_feb">Feb</div>
+            <div id="l_mar">Mar</div>
+            <div id="l_apr">Apr</div>
+            <div id="l_may">May</div>
+            <div id="l_jun">Jun</div>
+            <div id="l_jul">Jul</div>
+            <div id="l_aug">Aug</div>
+            <div id="l_sep">Sep</div>
+            <div id="l_oct">Oct</div>
+            <div id="l_nov">Nov</div>
+            <div id="l_dec">Dec</div>
+
         </div>
 
         <?php
