@@ -22,6 +22,7 @@ The templates folder will have the header and footer which are static and the bo
             ?>
             <script src='../js/search.js' type='text/javascript'></script>
             <script src='../js/findschools.js' type='text/javascript'></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <?php
         } else if (isset($_GET['cmd'])) {
 
@@ -75,6 +76,17 @@ The templates folder will have the header and footer which are static and the bo
                                 <script type="text/javascript" src="../js/datepicker/datepicker.js"></script>
                                 <script type="text/javascript" src="../js/ReportAbsence.js"></script>
 
+
+                                <?php
+                                break;
+                            case 'early-out':
+                                ?>
+                                <script type="text/javascript" src="../js/EarlyChekcout.js"></script>
+                                <?php
+                                break;
+                            case 'history':
+                                ?>
+                                <script type="text/javascript" src="../js/history.js"></script>
 
                                 <?php
                                 break;

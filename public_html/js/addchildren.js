@@ -165,8 +165,10 @@ function AddChildHandleAjaxResponse() {
                 document.getElementById("addchild_response").innerHTML = "<p style='color:#E12B2D;'>Error. We are unable to add your son to the system. If the error continues please contact our <a href='mailto:rostom.sahakian@gmail.com'>support team</p>.";
             } else {
                 console.log(xmlResponse);
-                document.getElementById("addchild_response").innerHTML = "<p style='color:#6DA815;'>" + fname + " " + lname + " was added as your child.</p><p>If you have more children that you need to add, please click here <a href='?cmd=account&do=add-child'>Add more</a></p>";
+                 window.location.hash = "right-side-top";
+                document.getElementById("addchild_response").innerHTML = "<p style='color:#6DA815;' id='added'>" + fname + " " + lname + " was added as your child.</p><p>If you have more children that you need to add, please click here <a href='?cmd=account&do=add-child'>Add more</a></p>";
                 document.getElementById('addchildform').style.display = "none";
+               
 //                setTimeout(function () {
 //                    window.location.href = "?cmd=account&do=default";
 //                }, 1000);

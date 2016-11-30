@@ -763,3 +763,51 @@ footer p{
         height: 160px;
     }
 }
+.question{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #EC2F2F;
+    width: 300px;
+}
+.months{
+    clear: both !important;
+}
+.months ul{
+    list-style: none;
+}
+.months ul li {
+    display: inline-block;
+    float: left;
+    padding-left: 29px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.main_bar{
+    min-height: 325px;
+}
+.bars {
+    list-style: none;
+}
+.bars li{
+    display: inline-block;
+    float: left;
+    padding-right: 29px;
+    padding-left: 20px;
+}
+.bars .bars_warpper{
+    position: relative; 
+    height: 325px;
+    /*margin-top: 112px;*/
+}
+.bars li .inside-shell{
+    position: absolute; 
+    bottom:0px; 
+    width: 35px; 
+    height: 2px; 
+    background: #00B545;
+    transition: height 0.2s ease-in-out;
+}
+.bars li .inside-shell:hover{
+    height: 200px;
+
+}

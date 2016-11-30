@@ -44,3 +44,6 @@ if(isset($_POST['doeditchild'])){
 if(isset($_POST['child_name'])){
     $ajax->DoReportAbsenceToSystem($_POST);
 }
+if(isset($_POST['h_year'])){
+    $ajax->GetHistory($_POST);
+}

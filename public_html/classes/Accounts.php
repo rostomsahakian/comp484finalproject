@@ -355,7 +355,7 @@ class Accounts {
                 </div>
             </div>
             <!--right side dynamic-->
-            <div class="account-right">
+            <div class="account-right" id="right-side-top">
                 <fieldset>
                     <div class="account-right-wrapper">
                         <?php
@@ -373,6 +373,7 @@ class Accounts {
                                     $this->EarlySignOutForm();
                                     break;
                                 case 'history':
+                                    $this->ShowHistory();
                                     break;
                                 case 'settings':
                                     break;
@@ -382,9 +383,12 @@ class Accounts {
                                     $this->DoEditChildInfo($_GET['id']);
                                     break;
                                 case 'delete':
-                                    if ($this->DeleteChildInfo($_GET['id'])) {
-                                        $this->message = "<p style='color:#25A766'>Deletion successful.</p>";
-                                    }
+                                    $this->AskQuestionFirst();
+
+
+//                                    if ($this->DeleteChildInfo($_GET['id'])) {
+//                                        $this->message = "<p style='color:#25A766'>Deletion successful.</p>";
+//                                    }
                                     $this->DefualtStateAccounts();
                                     break;
                                 default :
@@ -437,6 +441,12 @@ class Accounts {
                                                 <a href="?cmd=account&do=edit_child&id=<?= $row['id'] ?>" title="edit"><img src="../images/Penciledit.png"/></a>
                                                 &nbsp;
                                                 <a href="?cmd=account&do=delete&id=<?= $row['id'] ?>" title="delete"><img src="../images/delete.png"/></a>
+                                                &nbsp;
+                                                <a href="?cmd=account&do=report" title="report absent" ><img src="../images/absent.png" style="width: 20px;"/></a>
+                                                &nbsp;
+                                                <a href="?cmd=account&do=early-out" title="early checkout" ><img src="../images/early_chekcout.png" style="width: 20px;"/></a>
+
+
                                             </li>
                                             <li><b>Full Name:</b>&nbsp;<?= $row['fname'] . " " . $row['lname'] ?></li>
                                             <li><b>Student ID:</b>&nbsp;<?= $row['student_id'] ?></li>
@@ -510,6 +520,40 @@ class Accounts {
             $this->schoolName[] = NULL;
         }
         return $this->schoolName;
+    }
+
+    public function AskQuestionFirst() {
+        if (isset($_GET['q'])) {
+            if ($_GET['q'] == "Yes") {
+                if ($this->DeleteChildInfo($_GET['id'])) {
+                    $message = "<p style='color:#00B545'>Deletion was successful</p>";
+                    $hide = "style='display:none;'";
+                    echo $message;
+                } else {
+                    $message = "<p>Unable to delete.</p>";
+                    $hide = "";
+                    echo $message;
+                }
+            } else if ($_GET['q'] == "No") {
+                $hide = "style='display:none;'";
+            }
+        } else {
+            
+        }
+        ?>
+        <div class="question" <?= $hide ?>>
+            <form method="get">
+                <p>Are you sure you want to delete?</p>
+                <div>
+                    <input type="submit" name="q" value="Yes" id="a_yes"/>
+                    <input type="submit" name="q" value="No" id="a_no"/>
+                    <input type="hidden" name="do" value="delete"/>
+                    <input type="hidden" name="cmd" value="account"/>
+                    <input type="hidden" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : "" ?>"/>
+                </div> 
+            </form>
+        </div>
+        <?php
     }
 
     public function DeleteChildInfo($id) {
@@ -741,7 +785,7 @@ class Accounts {
                 </div>
                 <div>
                     <input type="password" name="ppass" id="ppass" placeholder="Re-enter your accounts password"/>
-                    <?= isset($_POST['ppass'])?$_POST['ppass']: ""; ?>
+                    <?= isset($_POST['ppass']) ? $_POST['ppass'] : ""; ?>
                     <br/>
                     <span id="ppass_e"></span>
                 </div>
@@ -751,7 +795,7 @@ class Accounts {
                 </div>
             </div>
         </form>
-                <div id="report_response"></div>
+        <div id="report_response"></div>
         <?php
     }
 
@@ -775,7 +819,249 @@ class Accounts {
             <div>
                 <p></p>
             </div>
+            <form method="post" id="early_signout">
+                <div>
+                    <label>Select the Student for Early Checkout</label>
+                </div>
+                <div>
+                    <?php
+                    $this->GetAllChildrenInformation($_SESSION['user_i']);
+                    ?>
+                    <select name="student" id="student">
+                        <option value="--">--Select Child--</option>
+                        <?php
+                        foreach ($this->child_info as $child) {
+                            ?>
+                            <option value="<?= $child['id'] ?>"><?= $child['fname'] . " " . $child['lname'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    <label>Time of Check out</label>
+                </div>
+                <div>
+                    <select name="hour" id="hour">
+                        <?php
+                        for ($h = 1; $h < 13; $h++) {
+                            ?>
+                            <option value="<?php
+                            if ($h < 10) {
+                                echo "0" . $h;
+                            } else {
+                                echo $h;
+                            }
+                            ?>"><?php
+                                        if ($h < 10) {
+                                            echo "0" . $h;
+                                        } else {
+                                            echo $h;
+                                        }
+                                        ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <select name="min" id="min">
+                        <?php
+                        for ($i = 0; $i < 60; $i++) {
+                            ?>
+
+                            <option value="<?php
+                            if ($i < 10) {
+                                echo "0" . $i;
+                            } else {
+                                echo $i;
+                            }
+                            ?>"><?php
+                                        if ($i < 10) {
+                                            echo "0" . $i;
+                                        } else {
+                                            echo $i;
+                                        }
+                                        ?></option>
+                            <?php
+                        }
+                        ?>
+
+                    </select>
+                    <select name="amorpm">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+
+                </div>
+                <div>
+                    <label>Person Picking up the child</label>
+                </div>
+                <div>
+                    <select name="picker" id="picker">
+                        <option value="--">--Select--</option>
+                        <option value="<?= $_SESSION['user_i'] ?>">Self</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div id="who" style="display: none;">
+                    <div>
+                        <label>Please Specify (Full Name , Driver's License#, Relation)</label>
+                    </div>
+                    <div>
+                        <textarea id="other_person"></textarea>
+                    </div>
+                    <div>
+                        <label>Upload the Image of the person's driver's license or a Valid Government issued ID</label>
+                    </div>
+                    <div>
+                        <input type="file" name="dl" id="id"/>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="doecheck" name="doecheck">Sign out Early</button>
+                </div>
+            </form>
         </div>
+        <?php
+    }
+
+    public function ShowHistory() {
+        ?>
+        <form method="post">
+            <div class="history-form">
+                <div>
+                    <label>Select Child</label>
+                </div>
+                <div>
+                    <?php
+                    $this->GetAllChildrenInformation($_SESSION['user_i']);
+                    ?>
+                    <select name="h_child" id="h_child">
+                        <option value="--">--Select Child--</option>
+                        <?php
+                        foreach ($this->child_info as $child) {
+                            ?>
+                            <option value="<?= $child['student_id'] ?>"><?= $child['fname'] . " " . $child['lname'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    <label>Select the Year</label>
+                </div>
+                <div>
+                    <select id="h_year" name="h_year">
+                        <option value="--">--Select--</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
+            </div>  
+        </form>
+        <div id="history_response">
+
+        </div>
+        <div class="main_bar" style="border-bottom: 1px solid #000000;">
+            <ul class="bars">
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="jan">
+                        </div>
+                    </div>
+
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="feb">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="mar">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="apr">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="may">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="jun">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="jul">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="aug">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="sep">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="oct">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="nov">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bars_warpper">
+                        <div class="inside-shell" id="dec">
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="months">
+            <ul>
+                <li>Jan</li>
+                <li>Feb</li>
+                <li>Mar</li>
+                <li>Apr</li>
+                <li>May</li>
+                <li>Jun</li>
+                <li>Jul</li>
+                <li>Aug</li>
+                <li>Sep</li>
+                <li>Oct</li>
+                <li>Nov</li>
+                <li>Dec</li>
+            </ul>
+        </div>
+
         <?php
     }
 

@@ -657,4 +657,21 @@ class body {
         }
     }
 
+    public function GetHistory($data) {
+
+        $sql = "SELECT * FROM `comp484_report_absence` WHERE `student_id` = '" . $data['h_child'] . "'  AND `parent_id`= '" . $_SESSION['user_i'] . "' AND `date_reported` LIKE '%" . $data['h_year'] . "%'";
+        //echo $sql;
+        $result = $this->_mysqli->query($sql);
+        $jsonData = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $jsonData[] = $row;
+            }
+      
+        } else {
+           $jsonData[] =  array("id" => "no result");
+        }
+              echo json_encode($jsonData);
+    }
+
 }
