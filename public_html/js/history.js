@@ -2,17 +2,47 @@ window.addEventListener("load", AbsentHistory, false);
 function AbsentHistory() {
 
     document.getElementById('h_child').onchange = function () {
-
-        document.getElementById('h_year').onchange = HistoryRunValidations;
-
         document.getElementById('h_year').value = "--";
-        Historyprocess();
+        var gyear = document.getElementById("h_year");
+        var hYear = gyear.options[gyear.selectedIndex].value;
+        Historyprocess(hYear);
+        callAgain();
+
     };
-//    document.getElementById("h_year").addEventListener("change", function (event) {
-//        event.preventDefault();
-//    });
 
+}
 
+function callAgain() {
+    document.getElementById('h_year').onchange = function () {
+        document.getElementById('jan_num').innerHTML = "";
+        document.getElementById('feb_num').innerHTML = "";
+        document.getElementById('mar_num').innerHTML = "";
+        document.getElementById('apr_num').innerHTML = "";
+        document.getElementById('may_num').innerHTML = "";
+        document.getElementById('jun_num').innerHTML = "";
+        document.getElementById('jul_num').innerHTML = "";
+        document.getElementById('aug_num').innerHTML = "";
+        document.getElementById('sep_num').innerHTML = "";
+        document.getElementById('oct_num').innerHTML = "";
+        document.getElementById('nov_num').innerHTML = "";
+        document.getElementById('dec_num').innerHTML = "";
+        document.getElementById('jan').style.height = "0px";
+        document.getElementById('feb').style.height = "0px";
+        document.getElementById('mar').style.height = "0px";
+        document.getElementById('apr').style.height = "0px";
+        document.getElementById('may').style.height = "0px";
+        document.getElementById('jun').style.height = "0px";
+        document.getElementById('jul').style.height = "0px";
+        document.getElementById('aug').style.height = "0px";
+        document.getElementById('sep').style.height = "0px";
+        document.getElementById('oct').style.height = "0px";
+        document.getElementById('nov').style.height = "0px";
+        document.getElementById('dec').style.height = "0px";
+        var getyear = document.getElementById("h_year");
+        var hisYear = getyear.options[getyear.selectedIndex].value;
+        Historyprocess(hisYear);
+        //callAgain();
+    }
 }
 
 function HistoryRunValidations() {
@@ -76,11 +106,11 @@ function HistoryXmlHttpRequestObject() {
 }
 
 //function which gets triggered on the event onkeyup in search box  
-function Historyprocess() {
+function Historyprocess(data) {
     if (xmlHttpHistory.readyState == 4 || xmlHttpHistory.readyState == 0) {
         //Store the keyword form the search box in a variable  
-        var getyear = document.getElementById("h_year");
-        var historyYear = encodeURIComponent(getyear.options[getyear.selectedIndex].value);
+        //var getyear = document.getElementById("h_year");
+        //var historyYear = encodeURIComponent(getyear.options[getyear.selectedIndex].value);
 
         var getChild = document.getElementById("h_child");
         var ChildID = encodeURIComponent(getChild.options[getChild.selectedIndex].value);
@@ -90,7 +120,7 @@ function Historyprocess() {
         xmlHttpHistory.open("POST", "ajax.php", true);
         xmlHttpHistory.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlHttpHistory.onreadystatechange = handleHistoryResponse;
-        xmlHttpHistory.send("h_year=" + historyYear + "&h_child=" + ChildID);
+        xmlHttpHistory.send("h_year=" + data + "&h_child=" + ChildID);
 
 
     } else {

@@ -376,19 +376,16 @@ class Accounts {
                                     $this->ShowHistory();
                                     break;
                                 case 'settings':
+                                    $this->AccountSetting();
                                     break;
                                 case 'messages':
+                                    $this->MessagesFrame();
                                     break;
                                 case 'edit_child':
                                     $this->DoEditChildInfo($_GET['id']);
                                     break;
                                 case 'delete':
                                     $this->AskQuestionFirst();
-
-
-//                                    if ($this->DeleteChildInfo($_GET['id'])) {
-//                                        $this->message = "<p style='color:#25A766'>Deletion successful.</p>";
-//                                    }
                                     $this->DefualtStateAccounts();
                                     break;
                                 default :
@@ -957,6 +954,7 @@ class Accounts {
                 <div>
                     <select id="h_year" name="h_year">
                         <option value="--">--Select--</option>
+                        <option value="2014">2014</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>
@@ -976,61 +974,61 @@ class Accounts {
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="jan">
-                      <span id="jan_num"></span>
+                    <span id="jan_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="feb">
-                      <span id="feb_num"></span>
+                    <span id="feb_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="mar">
-                      <span id="mar_num"></span>
+                    <span id="mar_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="apr">
-                      <span id="apr_num"></span>
+                    <span id="apr_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="may">
-                      <span id="may_num"></span>
+                    <span id="may_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="jun">
-                      <span id="jun_num"></span>
+                    <span id="jun_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="jul">
-                      <span id="jul_num"></span>
+                    <span id="jul_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="aug">
-                      <span id="aug_num"></span>
+                    <span id="aug_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="sep">
-                      <span id="sep_num"></span>
+                    <span id="sep_num"></span>
                 </div>
             </div>
 
             <div class="bars_warpper">
                 <div class="inside-shell" id="oct">
-                      <span id="oct_num"></span>
+                    <span id="oct_num"></span>
                 </div>
             </div>
 
@@ -1067,4 +1065,56 @@ class Accounts {
         <?php
     }
 
+    public function MessagesFrame() {
+        ?>
+        <div>
+            <h3>Messages</h3>
+        </div>
+        <div class="messages-wrapper">
+            <?php
+            if (isset($_GET['do']) && $_GET['do'] === "messages") {
+                $messages = $this->GetAllMessage($_SESSION['user_i']);
+                foreach ($messages as $m) {
+                    ?>
+                    <div class="messages">
+                        <p><b>From: </b><?= $m['from'] ?><p>
+                        <p><b>Date and Time: </b><?= $m['date_sent'] . " at " . $m['time_sent'] ?><p>
+                        <p><b>Original Message:</b><p>
+                        <p><?= $m['message'] ?></p>
+                    </div>
+
+                    <?php
+                }
+            }
+            ?>
+        </div>
+        <?php
+    }
+
+    public function GetAllMessage($data) {
+        $messages = array();
+        $sql = "SELECT * FROM `comp484_messages` WHERE `to` = '" .mysqli_real_escape_string($this->_mysqli,$data). "' ORDER BY `date_sent` ASC";
+        $result = $this->_mysqli->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row =  $result->fetch_array(MYSQLI_ASSOC)) {
+                $messages[] =  $row;
+            }
+            return $messages;
+        }
+    }
+    public function AccountSetting(){
+        ?>
+        <div>
+            <h3>Account Setting</h3>
+            <p>You can update your password, and other account settings</p>
+        </div>
+        <div>
+            <ul>
+                <li><a href="?cmd=account&do=settings&req=cp">Change Password</a></li>
+                <li><a href="?cmd=account&do=settings&req=upi">Update Personal Information</a></li>
+                <li><a href="?cmd=account&do=settings&req=upload">Add Identification Image (DL/ID)</a></li>
+            </ul>
+        </div>
+        <?php
+    }
 }
