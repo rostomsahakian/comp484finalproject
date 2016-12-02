@@ -78,7 +78,7 @@ class Navigation {
                                         case 'add-child':
                                             ?>
                                             <li><img src="../images/arrow-right.png"/></li>
-                                            <li><a href="?cmd=account&do=default"> <img src="../images/user_blue.png"/></a></li>
+                                            <li><a href="?cmd=account&do=default#default"> <img src="../images/user_blue.png"/></a></li>
                                             <li><img src="../images/arrow-right.png"/></li>
                                             <li><img src="../images/plus-sign.png"/></li>
 
@@ -87,7 +87,7 @@ class Navigation {
                                         case 'report':
                                             ?>
                                             <li><img src="../images/arrow-right.png"/></li>
-                                            <li><a href="?cmd=account&do=default"> <img src="../images/user_blue.png"/></a></li>
+                                            <li><a href="?cmd=account&do=default#default"> <img src="../images/user_blue.png"/></a></li>
                                             <li><img src="../images/arrow-right.png"/></li>
                                             <li><img src="../images/tasks.png"/></li>
 
@@ -96,7 +96,7 @@ class Navigation {
                                         case 'early-out':
                                             ?>
                                             <li><img src="../images/arrow-right.png"/></li>
-                                            <li><a href="?cmd=account&do=default"> <img src="../images/user_blue.png"/></a></li>
+                                            <li><a href="?cmd=account&do=default#default"> <img src="../images/user_blue.png"/></a></li>
                                             <li><img src="../images/arrow-right.png"/></li>
                                             <li><img src="../images/early-out.png"/></li>
 
@@ -105,7 +105,7 @@ class Navigation {
                                         case 'history':
                                             ?>
                                             <li><img src="../images/arrow-right.png"/></li>
-                                            <li><a href="?cmd=account&do=default"> <img src="../images/user_blue.png"/></a></li>
+                                            <li><a href="?cmd=account&do=default#default"> <img src="../images/user_blue.png"/></a></li>
                                             <li><img src="../images/arrow-right.png"/></li>
                                             <li><img src="../images/time.png"/></li>
 
@@ -118,9 +118,9 @@ class Navigation {
                                                     case 'cp':
                                                         ?>
                                                         <li><img src="../images/arrow-right.png"/></li>
-                                                        <li><a href="?cmd=account&do=default"><img src="../images/user_blue.png"/></a></li>
+                                                        <li><a href="?cmd=account&do=default#default"><img src="../images/user_blue.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>
-                                                        <li><a href="?cmd=account&do=settings"><img src="../images/gears.png"/></a></li>
+                                                        <li><a href="?cmd=account&do=settings#settings"><img src="../images/gears.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>
                                                         <li><img src="../images/lock-alt.png"/></li>
 
@@ -130,9 +130,9 @@ class Navigation {
                                                         ?>
 
                                                         <li><img src="../images/arrow-right.png"/></li>
-                                                        <li><a href="?cmd=account&do=default"><img src="../images/user_blue.png"/></a></li>
+                                                        <li><a href="?cmd=account&do=default#default"><img src="../images/user_blue.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>
-                                                        <li><a href="?cmd=account&do=settings"><img src="../images/gears.png"/></a></li>
+                                                        <li><a href="?cmd=account&do=settings#settings"><img src="../images/gears.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>
                                                         <li><img src="../images/edit_blue.png"/></li>
 
@@ -142,7 +142,7 @@ class Navigation {
                                                         ?>
 
                                                         <li><img src="../images/arrow-right.png"/></li>
-                                                        <li><a href="?cmd=account&do=default"><img src="../images/user_blue.png"/></a></li>
+                                                        <li><a href="?cmd=account&do=default#default"><img src="../images/user_blue.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>
                                                         <li><a href="?cmd=account&do=settings"><img src="../images/gears.png"/></a></li>
                                                         <li><img src="../images/arrow-right.png"/></li>

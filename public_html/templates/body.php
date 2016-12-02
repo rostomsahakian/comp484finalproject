@@ -173,9 +173,67 @@ class body {
     public function staticContent() {
         ?>
         <div class="main_content">
-            <h1>Reporting Absences System</h1>
-            <p>The form below will show you the reports of absences in each school. Please type in the district that you are interested in then choose the school from that district.</p>
+            <h1 id="video_title"> Article XV (Amendment 15 - Rights of Citizens to Vote)</h1>
+
+            <h3 id="video_desc">The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of race, color, or previous condition of servitude.</h3>
+            <div style="text-align: center;" id="main_video">
+                <iframe src="https://www.youtube.com/embed/APetG6zuous" frameborder="0" allowfullscreen id="video_u" ></iframe>
+
+            </div>
+            <h3 id="more_v">More Videos</h3>
+            <hr/>
+            <div class="video_placeholder" id="place_holder">
+                <ul>
+                    <li><a href="#main_video" id="vid1"/><img src="../images/cde_vid1.PNG"/></a></li>
+                    <li><a href="#main_video" id="vid2"/><img src="../images/cde_vid2.PNG"/></a></li>
+                    <li><a href="#main_video" id="vid3"/><img src="../images/cde_vid3.PNG"/></a></li>
+                    <li><a href="#main_video" id="vid4"/><img src="../images/cde_vid4.PNG"/></a></li>
+
+                </ul>
+            </div>
         </div>
+
+
+        <?php
+    }
+
+    public function RSSNews($url) {
+        ?>
+        <div id="body">
+            <div id="feedControl">Loading... <img src="../images/Loading_icon.gif" style="width: 100px;"/></div>
+        </div>
+        <script type="text/javascript">
+
+            var feedcontainer = document.getElementById("feedControl")
+            var feedurl = "<?= $url ?>"
+            var feedlimit = 20
+            var rssoutput = "<b>CA Dept of Education - What's New:</b><br /><ul>"
+
+            function rssfeedsetup() {
+                var feedpointer = new google.feeds.Feed(feedurl) //Google Feed API method
+                feedpointer.setNumEntries(feedlimit) //Google Feed API method
+                feedpointer.load(displayfeed) //Google Feed API method
+            }
+
+            function displayfeed(result) {
+                if (!result.error) {
+                    var thefeeds = result.feed.entries
+                    for (var i = 0; i < thefeeds.length; i++)
+                        rssoutput += "<li><a href='" + thefeeds[i].link + "' target='_Blank' title='" + thefeeds[i].title + "'>" + thefeeds[i].title + "</a><br/><span>" + thefeeds[i].publishedDate + "</span><br/><p>" + thefeeds[i].content + "</p><li>"
+                    rssoutput += "</ul>"
+                    feedcontainer.innerHTML = rssoutput
+                } else
+                    alert("Error fetching feeds!")
+            }
+
+            window.onload = function () {
+                rssfeedsetup()
+            }
+
+        </script>
+
+
+
         <?php
     }
 
@@ -667,11 +725,10 @@ class body {
             while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 $jsonData[] = $row;
             }
-      
         } else {
-           $jsonData[] =  array("id" => "no result");
+            $jsonData[] = array("id" => "no result");
         }
-              echo json_encode($jsonData);
+        echo json_encode($jsonData);
     }
 
 }

@@ -20,8 +20,8 @@ The templates folder will have the header and footer which are static and the bo
         <?php
         if ($_REQUEST == NULL || $_GET['cmd'] == "home") {
             ?>
-            <script src='../js/search.js' type='text/javascript'></script>
-            <script src='../js/findschools.js' type='text/javascript'></script>
+        <script type="text/javascript" src="../js/youtubeVideo.js"></script>
+
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <?php
         } else if (isset($_GET['cmd'])) {
@@ -48,6 +48,14 @@ The templates folder will have the header and footer which are static and the bo
                     ?>
                     <script src='../js/resetpass.js' type='text/javascript'></script>
 
+                    <?php
+                    break;
+                case 'news':
+                    ?>
+                    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                    <script type="text/javascript">
+                        google.load("feeds", "1") //Load Google Ajax Feed API (version 1)
+                    </script>
                     <?php
                     break;
                 case 'account':

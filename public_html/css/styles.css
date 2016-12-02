@@ -8,9 +8,11 @@ and open the template in the editor.
     Author     : rostom
 */
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url("http://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.css");
+
 body{
-    margin: 0;
-    padding: 0;
+    /*    margin: 0;
+        padding: 0;*/
     font-size: 15px;
     font-family: 'Source Sans Pro', sans-serif;
     background-color: #F7F4EE !important;
@@ -39,19 +41,12 @@ body{
     clear: both;
 }
 footer{
-    width: 65%;
-    margin: auto;
-    -webkit-box-shadow: -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
-    -moz-box-shadow:    -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
-    box-shadow:         -1px 3px 5px 1px rgba(50, 50, 50, 0.2);
-    background-color: #ffffff;
-    height: auto;
-    overflow-y: visible;
-    padding: 0px 1% 0px 1%;
-    height: 200px;
-    margin-bottom: 20px;
+
 }
-footer img{
+.footer_divider{
+    margin-top: 200px;
+}
+.footer_divider img{
     width: 100%;
 }
 footer p{
@@ -269,6 +264,7 @@ footer p{
 }
 #rightsres{
     text-align: center !important;
+    clear: both !important;
 }
 .login-main{
     width: 65%;
@@ -563,7 +559,7 @@ footer p{
 #leftnavigation ul li{
     padding: 0;
     margin: 0;
-    line-height: 15px;;
+    line-height: 15px;
 }
 
 #leftnavigation ul li a{
@@ -948,4 +944,75 @@ footer p{
     border: 1px solid #222222;
     padding: 15px;
 
+}
+
+#feedControl {
+    margin-top : 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width : 90%;
+    /*font-size: 12px;*/
+    color: #9CADD0;
+}
+#feedControl ul {
+    list-style: none;
+}
+#feedControl ul li a{
+    color:#000099;
+    font-size: 15px;
+}
+#feedControl ul li a:visited{
+    color:#000099;
+}
+#feedControl ul li p{
+    color:#000000;
+}
+.social_media{
+    float: right;
+}
+.social_media ul{
+    list-style: none;
+}
+.social_media ul li{
+    display: inline-block;
+    float: left;
+    padding-left: 4px;
+}
+.social_media ul li a img{
+    width: 25px;
+}
+.video_placeholder{
+    text-align: center;
+}
+.video_placeholderul{
+    list-style: none;
+}
+.video_placeholder ul li{
+    display: inline-block;
+    float: left;
+    padding-left: 10px; 
+}
+.video_placeholder ul li a img{
+    width: 170px;
+    height: 96px;
+    border: 1px solid black;
+    padding: 4px;
+}
+#more_v{
+    color:#D00D2D;
+}
+#main_video iframe{
+    width:560px;
+    height:315px;
+}
+.footer_wrapper{
+    width: 100%;
+}
+.footer_wrapper .footer-left{
+    float:left;
+    width: 45%;
+}
+.footer_wrapper .footer-right{
+    float: right;
+    width: 45%;
 }

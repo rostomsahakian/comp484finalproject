@@ -55,7 +55,10 @@ class loader {
                 case 'home':
 
                     $this->body->staticContent();
-                    $this->body->SearchSchools();
+                    //$this->body->SearchSchools();
+                    break;
+                case 'news':
+                    $this->body->RSSNews("http://www.cde.ca.gov/rssfeed.asp");
                     break;
                 case 'login':
                     $this->accounts->LoginForm();
@@ -95,7 +98,6 @@ class loader {
         }
         if (!isset($_GET['cmd'])) {
             $this->body->staticContent();
-            $this->body->SearchSchools();
         }
 
         include '../templates/footer.php';

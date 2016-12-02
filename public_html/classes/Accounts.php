@@ -183,7 +183,7 @@ class Accounts {
     public function AddChildForm() {
         ?>
         <form method="post" id="addchildform">
-            <div class="child-info">
+            <div class="child-info" id="add-child">
                 <p>Please add your children information by filling out the form below. If you have more than one child attending k-12 school, 
                     after finishing this form click "Add Child Information" once more.</p>
 
@@ -343,13 +343,13 @@ class Accounts {
             <div class="account-left">
                 <div id="leftnavigation">
                     <ul>
-                        <li><a href="?cmd=account&do=default">Edit Children's Information</a></li>
-                        <li><a href="?cmd=account&do=add-child">Add Child Information</a></li>
-                        <li><a href="?cmd=account&do=report">Report an Absence</a></li>
-                        <li><a href="?cmd=account&do=early-out">Early Sign Out Request</a></li>
-                        <li><a href="?cmd=account&do=history">History</a></li>
-                        <li><a href="?cmd=account&do=settings">Account Settings</a></li>
-                        <li><a href="?cmd=account&do=messages">Messages</a></li>
+                        <li><a href="?cmd=account&do=default#default">Edit Children's Information</a></li>
+                        <li><a href="?cmd=account&do=add-child#add-child">Add Child Information</a></li>
+                        <li><a href="?cmd=account&do=report#report_ab">Report an Absence</a></li>
+                        <li><a href="?cmd=account&do=early-out#e_out_c">Early Sign Out Request</a></li>
+                        <li><a href="?cmd=account&do=history#histroy_c">History</a></li>
+                        <li><a href="?cmd=account&do=settings#settings">Account Settings</a></li>
+                        <li><a href="?cmd=account&do=messages#messages">Messages</a></li>
                         <li id="clock"><a href="#"></a></li>
                     </ul>
                 </div>
@@ -415,7 +415,7 @@ class Accounts {
                 $child = "children";
             }
             ?>
-            <div class="default-state">
+            <div class="default-state" id="default">
                 <div class="default-state-left">
 
                     <h3>Your Children's Information</h3>
@@ -435,13 +435,13 @@ class Accounts {
 
                                         <ul id="children_info">
                                             <li id="edit-button">
-                                                <a href="?cmd=account&do=edit_child&id=<?= $row['id'] ?>" title="edit"><img src="../images/Penciledit.png"/></a>
+                                                <a href="?cmd=account&do=edit_child&id=<?= $row['id'] ?>#editit" title="edit"><img src="../images/Penciledit.png"/></a>
                                                 &nbsp;
-                                                <a href="?cmd=account&do=delete&id=<?= $row['id'] ?>" title="delete"><img src="../images/delete.png"/></a>
+                                                <a href="?cmd=account&do=delete&id=<?= $row['id'] ?>#del" title="delete"><img src="../images/delete.png"/></a>
                                                 &nbsp;
-                                                <a href="?cmd=account&do=report" title="report absent" ><img src="../images/absent.png" style="width: 20px;"/></a>
+                                                <a href="?cmd=account&do=report#repab" title="report absent" ><img src="../images/absent.png" style="width: 20px;"/></a>
                                                 &nbsp;
-                                                <a href="?cmd=account&do=early-out" title="early checkout" ><img src="../images/early_chekcout.png" style="width: 20px;"/></a>
+                                                <a href="?cmd=account&do=early-out#earlyso" title="early checkout" ><img src="../images/early_chekcout.png" style="width: 20px;"/></a>
 
 
                                             </li>
@@ -538,6 +538,7 @@ class Accounts {
             
         }
         ?>
+        <span  id="del"></span>
         <div class="question" <?= $hide ?>>
             <form method="get">
                 <p>Are you sure you want to delete?</p>
@@ -569,7 +570,7 @@ class Accounts {
         if ($getdata_res->num_rows > 0) {
             while ($row = $getdata_res->fetch_array(MYSQLI_ASSOC)) {
                 ?>
-
+                <span id="editit"></span>
                 <form method="post" id="edichildform">
                     <div class="child-info" id="hideedit">
 
@@ -719,8 +720,9 @@ class Accounts {
 
     public function ReportAbsenceForm() {
         ?>
+        <span id="repab"></span>
         <form method="post" id="report">     
-            <div class="report-absence">
+            <div class="report-absence" id="report_ab">
                 <h3>Report Absences before 09:00 AM</h3>
                 <p>!important Note: In the state of California, school attendance is mandatory for all students ages six through eighteen. 
                     California State Law says that a child is absent if he/she is ill or if there is a death in the immediate family (1-3 day limit). 
@@ -811,7 +813,8 @@ class Accounts {
 
     public function EarlySignOutForm() {
         ?>
-        <div class="early-sign-out">
+        <span id="earlyso"></span>
+        <div class="early-sign-out" id="e_out_c">
             <h3>Early Sign out Request</h3>
             <div>
                 <p></p>
@@ -924,7 +927,7 @@ class Accounts {
 
     public function ShowHistory() {
         ?>
-        <div class="hisory-top-div">
+        <div class="hisory-top-div" id="histroy_c">
             <h3>Your Child's Absentee History</h3>
         </div>
         <form method="post">
@@ -1067,10 +1070,10 @@ class Accounts {
 
     public function MessagesFrame() {
         ?>
-        <div>
+        <div id="messages">
             <h3>Messages</h3>
         </div>
-        <div class="messages-wrapper">
+        <div class="messages-wrapper" >
             <?php
             if (isset($_GET['do']) && $_GET['do'] === "messages") {
                 $messages = $this->GetAllMessage($_SESSION['user_i']);
@@ -1093,18 +1096,19 @@ class Accounts {
 
     public function GetAllMessage($data) {
         $messages = array();
-        $sql = "SELECT * FROM `comp484_messages` WHERE `to` = '" .mysqli_real_escape_string($this->_mysqli,$data). "' ORDER BY `date_sent` ASC";
+        $sql = "SELECT * FROM `comp484_messages` WHERE `to` = '" . mysqli_real_escape_string($this->_mysqli, $data) . "' ORDER BY `date_sent` ASC";
         $result = $this->_mysqli->query($sql);
         if ($result->num_rows > 0) {
-            while ($row =  $result->fetch_array(MYSQLI_ASSOC)) {
-                $messages[] =  $row;
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $messages[] = $row;
             }
             return $messages;
         }
     }
-    public function AccountSetting(){
+
+    public function AccountSetting() {
         ?>
-        <div>
+        <div id="settings">
             <h3>Account Setting</h3>
             <p>You can update your password, and other account settings</p>
         </div>
@@ -1117,4 +1121,5 @@ class Accounts {
         </div>
         <?php
     }
+
 }
