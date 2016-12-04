@@ -99,7 +99,7 @@ class Accounts {
         <div class="sign-up-main">
             <fieldset>
                 <legend><img src="../images/signup_w.png" id="dologinform"/>&nbsp;Sign Up</legend>
-                <form method="post">
+                <form method="post"  enctype="multipart/form-data">
 
                     <div>
                         <h3>Parent's / Guardian's Information</h3>
@@ -151,6 +151,13 @@ class Accounts {
                     </div>
                     <div id="telephone">
                         <input type="tel" name="tel2" id="tel2" placeholder="(555)555-5555"  onkeypress="return isNumberKey(event)" maxlength="10"/>
+                    </div>
+                    <div>
+                        <label>Upload the Image of your driver license or a Valid Government issued ID<span id="required_s">*</span>:</label>
+                    </div>
+                    <div id="parent_dl">
+                        <input type="file" name="uploadimage" id="uploadimage" placeholder="Driver License or ID" />
+                        <span id="p_dl_e"></span>
                     </div>
                     <div>
                         <h3>Password Section</h3>
@@ -817,17 +824,19 @@ class Accounts {
         <div class="early-sign-out" id="e_out_c">
             <h3>Early Sign out Request</h3>
             <div>
-                <p></p>
+                <p>In the event a student needs to be excused from class due to illness, doctor's appointment, or family event/emergency, 
+                    the parent/guardian must complete a sign-out form. The parent/guardian's ID is verified by the office staff before the student is released to accompany the parent/guardian. If the students returns before the end of the school day, 
+                    the parent/guardian should accompany the student to the office to ensure that the student is checked in again before returning to class. </p>
             </div>
             <form method="post" id="early_signout">
                 <div>
-                    <label>Select the Student for Early Checkout</label>
+                    <label>Select the Student for Early Checkout <span id="required_s">*</span></label>
                 </div>
                 <div>
                     <?php
                     $this->GetAllChildrenInformation($_SESSION['user_i']);
                     ?>
-                    <select name="student" id="student">
+                    <select name="student" id="student_to_signout">
                         <option value="--">--Select Child--</option>
                         <?php
                         foreach ($this->child_info as $child) {
@@ -837,9 +846,10 @@ class Accounts {
                         }
                         ?>
                     </select>
+                    <span id="std_e"></span>
                 </div>
                 <div>
-                    <label>Time of Check out</label>
+                    <label>Time of Check out<span id="required_s">*</span></label>
                 </div>
                 <div>
                     <select name="hour" id="hour">
@@ -863,6 +873,7 @@ class Accounts {
                         }
                         ?>
                     </select>
+                    <span id="hour_e"></span>
                     <select name="min" id="min">
                         <?php
                         for ($i = 0; $i < 60; $i++) {
@@ -880,20 +891,23 @@ class Accounts {
                                         } else {
                                             echo $i;
                                         }
-                                        ?></option>
+                                        ?>
+                            </option>
                             <?php
                         }
                         ?>
 
                     </select>
-                    <select name="amorpm">
-                        <option value="am">AM</option>
+                    <span id="min_e"></span>
+                    <select name="amorpm" id="amorpm">
+                        <option value="--">--</option>
+                        <option value="am" >AM</option>
                         <option value="pm">PM</option>
                     </select>
-
+                    <span id="amorpm_e"></span>
                 </div>
                 <div>
-                    <label>Person Picking up the child</label>
+                    <label>Person Picking up the child <span id="required_s">*</span><span id="required_s">*</span></label>
                 </div>
                 <div>
                     <select name="picker" id="picker">
@@ -901,26 +915,46 @@ class Accounts {
                         <option value="<?= $_SESSION['user_i'] ?>">Self</option>
                         <option value="other">Other</option>
                     </select>
+                    <span id="picker_e"></span>
                 </div>
                 <div id="who" style="display: none;">
                     <div>
-                        <label>Please Specify (Full Name , Driver's License#, Relation)</label>
+                        <label>Please Specify (Full Name , Driver's License#, Relation)<span id="required_s">*</span></label>
                     </div>
                     <div>
-                        <textarea id="other_person"></textarea>
+                        <input type="text" id="ofull_name" name="other_person_full_name" placeholder="Full Name"/>
+                        <span id="fullname_e"></span>
                     </div>
                     <div>
-                        <label>Upload the Image of the person's driver's license or a Valid Government issued ID</label>
+                        <input type="text" id="other_person_id" name="other_person_id" placeholder="Driver's License# or ID#"/>
+                        <span id="oid_e"></span>
                     </div>
                     <div>
-                        <input type="file" name="dl" id="id"/>
+                        <input type="text" id="other_person_relation" name="other_person_relation" placeholder="relation"/>
+                        <span id="rel_e"></span>
                     </div>
+                    <div>
+                        <label>Upload the Image of the person's driver's license or a Valid Government issued ID<span id="required_s">*</span></label>
+                    </div>
+                    <div>
+                        <input type="file" name="uploadimage" id="uploadimage"/>
+                        <span id="file_e"></span>
+                    </div>
+                </div>
+                <div>
+                    <label>Password<span id="required_s">*</span></label>
+                </div>
+                <div>
+                    <input type="hidden" name="parent_id" id="parent_id" value="<?= $_SESSION['user_i'] ?>"/>
+                    <input type="password" name="p_verify" id="p_verify" placeholder="Verify your identity"/>
+                    <span id="passw_e"></span>
                 </div>
 
                 <div>
                     <button type="submit" id="doecheck" name="doecheck">Sign out Early</button>
                 </div>
             </form>
+            <div id="esignout_response"></div>
         </div>
         <?php
     }

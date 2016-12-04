@@ -26,24 +26,27 @@ if (isset($_POST['r_pass'])) {
 if (isset($_POST['dosignup'])) {
     $ajax->SignUpProcess($_POST);
 }
-if(isset($_POST['resetpass'])){
+if (isset($_POST['resetpass'])) {
     $ajax->ResetPasswordProcess($_POST);
 }
-if(isset($_POST['schoold']) && isset($_POST['key'])){
+if (isset($_POST['schoold']) && isset($_POST['key'])) {
     $ajax->GetSchoolNamesByDistrictID($_POST['schoold']);
 }
-if(isset($_POST['teacher'])){
+if (isset($_POST['teacher'])) {
     $ajax->DoAddChildrenIntoDatabase($_POST);
 }
-if(isset($_POST['editschool'])){
-     $ajax->GetSchoolNamesByDistrictID($_POST['editschool']);
+if (isset($_POST['editschool'])) {
+    $ajax->GetSchoolNamesByDistrictID($_POST['editschool']);
 }
-if(isset($_POST['doeditchild'])){
+if (isset($_POST['doeditchild'])) {
     $ajax->EditChildInformation($_POST);
 }
-if(isset($_POST['child_name'])){
+if (isset($_POST['child_name'])) {
     $ajax->DoReportAbsenceToSystem($_POST);
 }
-if(isset($_POST['h_year'])){
+if (isset($_POST['h_year'])) {
     $ajax->GetHistory($_POST);
+}
+if (isset($_POST['pickuptime'])) {
+    $ajax->EarlySignoutProcess($_POST);
 }

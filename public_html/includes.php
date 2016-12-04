@@ -12,7 +12,7 @@ include 'private/DBCon.php';
 include 'private/Defines.php';
 include 'private/CreateTables.php';
 include 'classes/Navigation.php';
-
+include 'classes/uploader.php';
 
 
 

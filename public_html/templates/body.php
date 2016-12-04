@@ -24,8 +24,10 @@ class body {
     public function __construct() {
         $this->_db = DBCon::getInstance();
         $this->_mysqli = $this->_db->getConnection();
-//        if (isset($_POST['child_name'])) {
-//            $this->DoReportAbsenceToSystem($_POST);
+//
+//        if (isset($_POST['dosignup'])) {
+//            $this->SignUpProcess($_POST);
+//            //$this->DoReportAbsenceToSystem($_POST);
 //        }
     }
 
@@ -390,6 +392,11 @@ class body {
                         if ($result5) {
                             $status4 = true;
                         }
+                        /*
+                         * insert driver license into comp484_parent_dl
+                         */
+                        $d = array("parent_id" => $id['id'], "other_name" => "");
+                        $this->Do_Upload_images($d, $_FILES);
                     }
                 }
             }
@@ -729,6 +736,143 @@ class body {
             $jsonData[] = array("id" => "no result");
         }
         echo json_encode($jsonData);
+    }
+
+    /*
+     * Upload Images
+     * It will got to a frontend fold and will have its own directory for each page type
+     */
+
+    public function Do_Upload_images($d, $files) {
+//        echo "<br/>";
+//        var_dump($_FILES);
+        $data = array(
+            "table" => "comp484_parent_dl",
+            "field" => "parent_id",
+            "value" => $d['parent_id']
+        );
+        $get_number_of_images = $this->GetNumberOfImages($data);
+
+        $number = $get_number_of_images['row_count'];
+
+        // Create directory if it does not exist
+        $folder_name = "license_parentid_" . $d['parent_id'] . '/';
+        if (!is_dir(ABSOLUTH_PATH_IMAGES . $folder_name)) {
+            mkdir(ABSOLUTH_PATH_IMAGES . $folder_name);
+        }
+
+
+        $upload_file_new_name = preg_replace('/^.*\.([^.]+)$/D', "dl_number_" . ((int) $number + 1) . ".$1", basename($_FILES["uploadimage"]['name']));
+//        echo "<br/>";
+//        echo $upload_file_new_name;
+        $upload_folder = ABSOLUTH_PATH_IMAGES . $folder_name;
+        $upload_file = ABSOLUTH_PATH_IMAGES . $folder_name . $upload_file_new_name;
+
+        //$path_2 = FE_IMAGES . $logo_name . "_logo/";
+        //$path = P_IMAGE_PATH . $logo_name . "_logo/";
+
+        $uploadOk = 1;
+
+        $imageFileType = pathinfo($upload_file, PATHINFO_EXTENSION);
+
+
+        if (isset($_POST)) {
+            
+        }
+        if (file_exists($upload_file)) {
+            $uploadOk = 0;
+        }
+        if ($_FILES['uploadimage']["size"] > 5000000) {
+            
+        }
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "PNG" && $imageFileType != "JPG" && $imageFileType != "JPEG" && $imageFileType != "GIF") {
+            $uploadOk = 0;
+        }
+        if ($uploadOk == 0) {
+            
+        } else {
+            if (file_exists("$folder_name.$upload_file")) {
+                unlink("$folder_name.$upload_file");
+            }
+
+            if (move_uploaded_file($_FILES['uploadimage']["tmp_name"], $upload_file)) {
+
+                $insert_image = "INSERT INTO `comp484_parent_dl` (parent_id, other_name, folder, image_name, date_added) "
+                        . "VALUES "
+                        . "('" . $d['parent_id'] . "', '" . $d['other_name'] . "', '" . $upload_folder . "', '" . $upload_file_new_name . "', '" . DATE_ADDED . "')";
+//                echo "<br/>";
+//                echo $insert_image;
+                $insert_result = $this->_mysqli->query($insert_image);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function is_dir_empty($dir) {
+        if (!is_readable($dir))
+            return NULL;
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    public function GetNumberOfImages(array $data) {
+        $sql = "SELECT COUNT(id) AS row_count FROM `" . $data['table'] . "` WHERE `" . $data['field'] . "` = '" . $data['value'] . "'";
+        $result = $this->_mysqli->query($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+
+        if ($result) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function EarlySignoutProcess($data) {
+        /*
+         * Check the password
+         */
+        $check_p = "SELECT * FROM `comp484_users_info` WHERE `id` = '" . $data['parent_id'] . "' AND password ='" . md5($data['password']) . "'";
+        // echo $check_p;
+        $check_p_res = $this->_mysqli->query($check_p);
+        if ($check_p_res->num_rows > 0) {
+            /*
+             * Insert data into comp484_early_signout and comp484_parent_dl if other
+             */
+            $insert = "INSERT INTO `comp484_early_signout` (student_id, parent_id, checkout_time, request_date, picker, picker_id, picker_relation) VALUES "
+                    . "("
+                    . "'" . $data['student'] . "', "
+                    . "'" . $data['parent_id'] . "', "
+                    . "'" . $data['pickuptime'] . "', "
+                    . "'" . DATE_ADDED . "', ";
+            if ($data['picker'] == $data['parent_id']) {
+                $picker = "self";
+            } else {
+                $picker = $data['fullname'];
+            }
+            $insert.= "'" . $picker . "', ";
+
+            $insert.="'" . $data['pickerid'] . "', ";
+            $insert.= "'" . $data['relation'] . "' ";
+            $insert.= ")";
+            $insert_res = $this->_mysqli->query($insert);
+            if ($data['picker'] === "other") {
+                /*
+                 * Add the dl/id image to table and folder
+                 */
+                $d = array("parent_id" => $data['parent_id'], "other_name" => $data['fullname']);
+                $this->Do_Upload_images($d, $files);
+            }
+            echo "request added";
+        } else {
+            echo "invalid password";
+        }
     }
 
 }

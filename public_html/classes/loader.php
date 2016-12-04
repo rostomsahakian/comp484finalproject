@@ -22,6 +22,7 @@ class loader {
     public $tables;
     public $foorter;
     public $accounts;
+    public $uploader;
 
     //put your code here
     public function __construct() {
@@ -34,7 +35,7 @@ class loader {
         $this->navigation = new Navigation();
         $this->body = new body();
         $this->accounts = new Accounts();
-
+//        $this->uploader = new uploader();
 
         /*
          * call functions from private/CreateTables Here 
