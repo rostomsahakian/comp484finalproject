@@ -80,7 +80,7 @@ function CheckHour() {
     console.log(hrs);
     if (hrs > 12) {
         var hour = hrs - 12;
-        if (hrs < 10) {
+        if (hour < 10) {
             var hr = "0" + hour;
             document.getElementById('hour').value = hr;
         } else {
