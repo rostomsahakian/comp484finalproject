@@ -1,3 +1,7 @@
+/*
+ * @author: Arin Zargarian
+ * @date: 12/02/2016
+ */
 window.addEventListener("load", onClickGetSrc, false);
 function onClickGetSrc() {
     GetElements('vid1', 'vid2', 'vid3', 'vid4', 'video_title', 'video_desc');

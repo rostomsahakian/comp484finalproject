@@ -1,9 +1,7 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+ * @author: Arin Zargarian
+ * @date: 11/26/2016
  */
-
 
 function AllRightsReserved() {
     var today = new Date();

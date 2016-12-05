@@ -1,3 +1,7 @@
+/*
+ * @author: Arin Zargarian
+ * @date: 11/26/2016
+ */
 function loadClock(){
     
 }

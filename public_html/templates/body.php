@@ -175,11 +175,12 @@ class body {
     public function staticContent() {
         ?>
         <div class="main_content">
-            <h1 id="video_title"> Article XV (Amendment 15 - Rights of Citizens to Vote)</h1>
+            <h1 id="video_title">Rhetorical Reading Review (CA Dept of Education) </h1>
 
-            <h3 id="video_desc">The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of race, color, or previous condition of servitude.</h3>
+            <h3 id="video_desc">From the Formative Assessment in Action series, California educator Leisa Machado models formative practices as her grade
+ 7 ELA class annotates an article, works collaboratively on posters, and uses text-on-text graffiti to provide feedback to peers.</h3>
             <div style="text-align: center;" id="main_video">
-                <iframe src="https://www.youtube.com/embed/APetG6zuous" frameborder="0" allowfullscreen id="video_u" ></iframe>
+                <iframe src="https://www.youtube.com/embed/mml9UjvuvO8" frameborder="0" allowfullscreen id="video_u" ></iframe>
 
             </div>
             <h3 id="more_v">More Videos</h3>
