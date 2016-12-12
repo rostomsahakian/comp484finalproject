@@ -4,17 +4,23 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/templates/header.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/signup.js</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/autoLoader.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/private/DBCon.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/ajax.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/media.css</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/loader.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/clock.js</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/Accounts.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/youtubeVideo.js</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/templates/body.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/EarlyChekcout.js</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/styles.css</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/includes.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/private/CreateTables.php</file>
             <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/private/Defines.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/signup.js</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/autoLoader.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/ajax.php</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/css/media.css</file>
-            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/loader.php</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/js/allrights.js</file>
+            <file>file:/C:/Users/rostom/Documents/NetBeansProjects/Comp484FinalProject/public_html/classes/Navigation.php</file>
         </group>
     </open-files>
 </project-private>

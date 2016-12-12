@@ -4,10 +4,10 @@
  * DB INFO
  * Change if the data is different
  */
-define("DB_USERNAME", "comp484");
-define("DB_PASSWORD", "Comp484FinalProject@");
+define("DB_USERNAME", "comp484");//change this 
+define("DB_PASSWORD", "Comp484FinalProject@"); // change this
 define("DB_NAME", "comp484"); //change this
-define("DB_HOST", "localhost");
+define("DB_HOST", "localhost");//change this
 
 
 define("ABSOLUTH_PATH_CLASSES", "../classes/");
